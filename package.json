@@ -1,29 +1,26 @@
 {
-  "name": "bran-web-database-template",
+  "name": "abec-open-database",
   "version": "1.0.0",
-  "description": "Template leve e reproduzível para APIs REST públicas e Dashboards de bases de dados acadêmicas da BRAN Org.",
+  "description": "Base de dados pública e REST API do acervo completo do ABEC Meeting (2013-2025), mantida pela BRAN Org.",
   "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "start:ebbc": "DATASET_DIR=mock/ebbc/data CONFIG_PATH=mock/ebbc/dataset.config.json node server.js",
-    "dev:ebbc": "DATASET_DIR=mock/ebbc/data CONFIG_PATH=mock/ebbc/dataset.config.json node --watch server.js",
-    "data:ebbc": "DATASET_DIR=mock/ebbc/data CONFIG_PATH=mock/ebbc/dataset.config.json node scripts/validate_dataset.js",
-    "test": "NODE_ENV=test node --test tests/unit.test.js tests/api.test.js",
+    "data:scrape": "python3 scripts/scrape_abec.py",
     "data:convert": "node scripts/convert_csv_to_json.js",
     "data:validate": "node scripts/validate_dataset.js"
   },
   "keywords": [
+    "abec-meeting",
     "open-data",
     "bran-org",
     "api",
     "academic-data",
-    "database-template",
     "express"
   ],
   "author": "BRAN Org",
-  "license": "UNLICENSED",
+  "license": "CC-BY-4.0",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.0.0"

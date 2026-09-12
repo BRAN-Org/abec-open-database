@@ -3,17 +3,17 @@
     "name": "BRAN Org",
     "url": "https://github.com/BRAN-Org",
     "logo": "https://avatars.githubusercontent.com/u/328064865?v=4",
-    "institutionName": "Faculdade / Periódico / Evento Científico",
-    "githubUrl": "https://github.com/BRAN-Org/bran-web-database-template",
-    "doiUrl": "https://doi.org/10.5281/zenodo.0000000",
-    "issuesUrl": "https://github.com/BRAN-Org/bran-web-database-template/issues"
+    "institutionName": "ABEC Brasil - Associação Brasileira de Editores Científicos",
+    "githubUrl": "https://github.com/BRAN-Org/abec-open-database",
+    "doiUrl": "https://doi.org/10.21452/abecmeeting",
+    "issuesUrl": "https://github.com/BRAN-Org/abec-open-database/issues"
   },
   "dataset": {
-    "title": "BRAN Academic Database Template",
-    "description": "Infraestrutura aberta de dados acadêmicos e científicos. Este portal disponibiliza acervos públicos de anais, edições e periódicos em formatos limpos e padronizados, com API REST pública e ferramentas para análise cientométrica e bibliométrica no Brasil.",
+    "title": "ABEC Meeting Open Database",
+    "description": "Base de dados aberta e acervo completo 100% digitalizado dos anais e resumos das edições do ABEC Meeting (2013-2025), promovidos pela Associação Brasileira de Editores Científicos (ABEC Brasil) e disponibilizados pela BRAN Org sob princípios FAIR e BOAI.",
     "version": "1.0.0",
-    "doi": "10.5281/zenodo.0000000",
-    "license": "A ser definida (Configurável)",
+    "doi": "10.21452/abecmeeting",
+    "license": "CC-BY 4.0",
     "entityName": "articles",
     "singularName": "Artigo",
     "pluralName": "Artigos",
@@ -21,29 +21,29 @@
     "secondaryKey": "id"
   },
   "schema": {
-    "searchFields": ["title", "abstract", "authors", "keywords", "tools", "data_sources"],
+    "searchFields": ["title", "abstract", "authors", "keywords", "section", "issue", "affiliations"],
     "facets": [
-      { "key": "year", "label": "Ano / Edição", "type": "number", "multi": true },
+      { "key": "year", "label": "Ano de Publicação", "type": "number", "multi": true },
       { "key": "author", "label": "Autor", "type": "string", "targetField": "authors" },
-      { "key": "tool", "label": "Ferramenta / Software", "type": "string", "targetField": "tools" },
-      { "key": "source", "label": "Fonte de Dados", "type": "string", "targetField": "data_sources" },
-      { "key": "stage", "label": "Etapa Metodológica", "type": "string", "targetField": "usage_stages" }
+      { "key": "section", "label": "Eixo Temático / Seção", "type": "string", "targetField": "section" },
+      { "key": "keyword", "label": "Palavra-chave", "type": "string", "targetField": "keywords" },
+      { "key": "issue", "label": "Edição do Evento", "type": "string", "targetField": "issue" }
     ],
     "sortFields": [
-      { "key": "title", "label": "Título" },
       { "key": "year", "label": "Ano" },
+      { "key": "title", "label": "Título" },
       { "key": "doi", "label": "DOI" }
     ]
   },
   "stats": {
     "topLists": [
-      { "key": "topTools", "label": "Principais Ferramentas / Softwares", "sourceField": "tools", "limit": 10 },
-      { "key": "topSources", "label": "Principais Fontes de Dados", "sourceField": "data_sources", "limit": 10 },
-      { "key": "topAuthors", "label": "Principais Autores", "sourceField": "authors", "limit": 10 }
+      { "key": "topAuthors", "label": "Principais Autores", "sourceField": "authors", "limit": 10 },
+      { "key": "topKeywords", "label": "Palavras-chave Mais Utilizadas", "sourceField": "keywords", "limit": 10 },
+      { "key": "topSections", "label": "Principais Seções / Eixos Temáticos", "sourceField": "section", "limit": 10 }
     ],
     "breakdowns": [
-      { "key": "yearDistribution", "label": "Distribuição por Ano", "sourceField": "year" },
-      { "key": "stageBreakdown", "label": "Etapas Metodológicas", "sourceField": "usage_stages" }
+      { "key": "yearDistribution", "label": "Distribuição de Trabalhos por Ano", "sourceField": "year" },
+      { "key": "sectionBreakdown", "label": "Distribuição por Seção", "sourceField": "section" }
     ]
   }
 }
