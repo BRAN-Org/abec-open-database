@@ -1,0 +1,4 @@
+# Arquivos e diretórios preservados em cada repositório filho de evento
+data/
+config/dataset.config.json
+README.md
