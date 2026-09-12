@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ABEC Meeting Open Database - BRAN Org</title>
+  <title>BRAN OpenData OS - Base de Dados Acadêmica & Eventos</title>
   
   <!-- Geist & Geist Mono Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
       <!-- Quick Search Bar in Top Header -->
       <div class="top-search-container">
         <i class="fa-solid fa-magnifying-glass top-search-icon"></i>
-        <input type="text" id="top-quick-search" class="top-search-input" placeholder="Buscar registros, autores, ferramentas...">
+        <input type="text" id="top-quick-search" class="top-search-input" placeholder="Buscar trabalhos, autores, tópicos...">
       </div>
       
       <!-- Badges / External Links & Status Dot -->
@@ -58,13 +58,10 @@
         <i class="fa-solid fa-house"></i> <span>Início</span>
       </button>
       <button class="tab-btn" data-tab="dashboard-tab">
-        <i class="fa-solid fa-chart-line"></i> <span>Dashboard Completo</span>
+        <i class="fa-solid fa-chart-line"></i> <span>Dashboard (Métricas)</span>
       </button>
       <button class="tab-btn" data-tab="explorer-tab" id="explorer-tab-btn">
         <i class="fa-solid fa-magnifying-glass"></i> <span>Explorador de Dados</span>
-      </button>
-      <button class="tab-btn" data-tab="correlations-tab">
-        <i class="fa-solid fa-diagram-project"></i> <span>Análises & Correlações</span>
       </button>
       <button class="tab-btn" data-tab="docs-tab">
         <i class="fa-solid fa-code"></i> <span>Documentação da API</span>
@@ -89,7 +86,7 @@
           
           <div class="hero-description-box">
             <p id="home-description-text">
-              Infraestrutura aberta de dados acadêmicos e científicos. Este portal disponibiliza acervos públicos de anais, edições e periódicos em formatos limpos e padronizados, com API REST pública e ferramentas para análise cientométrica e bibliométrica no Brasil.
+              Infraestrutura aberta de dados acadêmicos e científicos. Este portal disponibiliza acervos públicos de anais, edições e periódicos em formatos limpos e padronizados, com API REST pública e ferramentas para análise estatística no Brasil.
             </p>
           </div>
         </div>
@@ -102,25 +99,25 @@
               <h3>Total de Registros</h3>
               <p class="stat-value" id="home-stat-total">-</p>
             </div>
-            <div class="stat-footer">Publicações nos anais</div>
+            <div class="stat-footer">Trabalhos catalogados</div>
           </div>
           
           <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
             <div class="stat-info">
-              <h3>Adoção de Ferramentas</h3>
-              <p class="stat-value" id="home-stat-tools">-</p>
+              <h3>Edições Catalogadas</h3>
+              <p class="stat-value" id="home-stat-years">-</p>
             </div>
-            <div class="stat-footer">Com softwares metodológicos</div>
+            <div class="stat-footer">Anos cobertos pelo acervo</div>
           </div>
           
           <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-database"></i></div>
+            <div class="stat-icon"><i class="fa-solid fa-layer-group"></i></div>
             <div class="stat-info">
-              <h3>Fontes Mapeadas</h3>
-              <p class="stat-value" id="home-stat-sources">-</p>
+              <h3>Eixos Temáticos</h3>
+              <p class="stat-value" id="home-stat-sections">-</p>
             </div>
-            <div class="stat-footer">Bancos de dados e repositórios</div>
+            <div class="stat-footer">Seções e trilhas do evento</div>
           </div>
           
           <div class="stat-card">
@@ -138,53 +135,53 @@
           <div class="feature-card glass-panel">
             <div class="feature-icon"><i class="fa-solid fa-unlock-keyhole"></i></div>
             <h3>Dados Abertos e Transparência</h3>
-            <p>Acesso totalmente gratuito e sem necessidade de autenticação aos metadados bibliométricos do evento, garantindo reprodutibilidade científica e transparência metodológica.</p>
+            <p>Acesso gratuito e sem necessidade de autenticação aos metadados do acervo, garantindo reprodutibilidade científica e transparência institucional.</p>
           </div>
 
           <div class="feature-card glass-panel">
             <div class="feature-icon"><i class="fa-solid fa-network-wired"></i></div>
             <h3>API REST & Exportação Dual</h3>
-            <p>Consuma via endpoints JSON estruturados ou realize exportação dos dados filtrados diretamente nos formatos JSON e CSV com suporte a acentuação UTF-8 BOM.</p>
+            <p>Consuma via endpoints JSON estruturados ou realize exportação dos dados filtrados diretamente nos formatos JSON e CSV com acentuação UTF-8 BOM.</p>
           </div>
 
           <div class="feature-card glass-panel">
             <div class="feature-icon"><i class="fa-solid fa-chart-pie"></i></div>
-            <h3>Análise Cientométrica Em Memória</h3>
-            <p>Gráficos interativos, matrizes de coocorrência e dispersões estatísticas processadas de forma rápida, segura e 100% autônoma a partir dos dados do evento.</p>
+            <h3>Métricas & Gráficos Universais</h3>
+            <p>Gráficos interativos em Canvas de evolução histórica, distribuição por eixos temáticos, ranking de autores e palavras-chave mais citadas.</p>
           </div>
         </div>
 
       </section>
 
-      <!-- 1. DASHBOARD COMPLETO (TODOS OS DADOS DA API) -->
+      <!-- 1. DASHBOARD COMPLETO (4 GRÁFICOS UNIVERSIAS E ESSENCIAIS) -->
       <section id="dashboard-tab" class="tab-panel">
         <!-- Key Stats Cards Consolidados -->
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-icon"><i class="fa-solid fa-file-invoice"></i></div>
             <div class="stat-info">
-              <h3>Total de Artigos</h3>
+              <h3>Total de Trabalhos</h3>
               <p class="stat-value" id="stat-total-articles">-</p>
             </div>
-            <div class="stat-footer">2012 a 2024</div>
+            <div class="stat-footer">Publicações no acervo</div>
           </div>
           
           <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
             <div class="stat-info">
-              <h3>Adoção de Ferramentas</h3>
-              <p class="stat-value" id="stat-tool-percentage">-</p>
+              <h3>Edições Catalogadas</h3>
+              <p class="stat-value" id="stat-unique-years">-</p>
             </div>
-            <div class="stat-footer" id="stat-tool-count">Com softwares identificados</div>
+            <div class="stat-footer">Anos cobertos pelo evento</div>
           </div>
           
           <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-database"></i></div>
+            <div class="stat-icon"><i class="fa-solid fa-layer-group"></i></div>
             <div class="stat-info">
-              <h3>Fontes Mapeadas</h3>
-              <p class="stat-value" id="stat-unique-sources">-</p>
+              <h3>Eixos Temáticos</h3>
+              <p class="stat-value" id="stat-unique-sections">-</p>
             </div>
-            <div class="stat-footer">Bancos de dados e portais</div>
+            <div class="stat-footer">Seções e categorias</div>
           </div>
           
           <div class="stat-card">
@@ -193,23 +190,14 @@
               <h3>Pesquisadores</h3>
               <p class="stat-value" id="stat-unique-authors">-</p>
             </div>
-            <div class="stat-footer">Autores nos anais</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-chart-pie"></i></div>
-            <div class="stat-info">
-              <h3>Distribuição Pareto</h3>
-              <p class="stat-value" id="stat-pareto-ratio">80/20</p>
-            </div>
-            <div class="stat-footer">Concentração de ferramentas</div>
+            <div class="stat-footer">Autores catalogados</div>
           </div>
         </div>
 
         <!-- Charts Customizer Toolbar -->
         <div class="charts-toolbar glass-panel">
           <div class="toolbar-title">
-            <i class="fa-solid fa-sliders"></i> <span>Personalizar Visualização (Simeon OS)</span>
+            <i class="fa-solid fa-sliders"></i> <span>Personalizar Visualização</span>
           </div>
           <div class="toolbar-controls">
             <div class="toolbar-control">
@@ -234,65 +222,49 @@
           </div>
         </div>
 
-        <!-- Full Charts Grid 6 Panels (Todos os Dados) -->
+        <!-- 4 Universal Essential Charts Grid -->
         <div class="charts-grid">
+          <!-- Chart 1: Evolution over Years -->
           <div class="chart-card">
             <div class="chart-header">
               <h3><i class="fa-solid fa-calendar-days"></i> <span>Publicações por Edição (Histórico)</span></h3>
-              <button class="btn-chart-export" data-chart="years" title="Exportar como Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
+              <button class="btn-chart-export" data-chart="years" title="Exportar Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
             </div>
             <div class="chart-container">
               <canvas id="chart-years"></canvas>
             </div>
           </div>
           
+          <!-- Chart 2: Section Breakdown -->
           <div class="chart-card">
             <div class="chart-header">
-              <h3><i class="fa-solid fa-screwdriver-wrench"></i> <span>Top Softwares & Ferramentas</span></h3>
-              <button class="btn-chart-export" data-chart="tools" title="Exportar como Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
+              <h3><i class="fa-solid fa-layer-group"></i> <span>Distribuição por Eixo Temático / Seção</span></h3>
+              <button class="btn-chart-export" data-chart="sections" title="Exportar Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
             </div>
             <div class="chart-container">
-              <canvas id="chart-tools"></canvas>
+              <canvas id="chart-sections"></canvas>
             </div>
           </div>
 
+          <!-- Chart 3: Top Authors -->
           <div class="chart-card">
             <div class="chart-header">
-              <h3><i class="fa-solid fa-cloud-arrow-down"></i> <span>Principais Fontes de Coleta de Dados</span></h3>
-              <button class="btn-chart-export" data-chart="sources" title="Exportar como Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
+              <h3><i class="fa-solid fa-users"></i> <span>Principais Autores / Pesquisadores</span></h3>
+              <button class="btn-chart-export" data-chart="authors" title="Exportar Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
             </div>
             <div class="chart-container">
-              <canvas id="chart-sources"></canvas>
+              <canvas id="chart-authors"></canvas>
             </div>
           </div>
 
+          <!-- Chart 4: Top Keywords / Topics -->
           <div class="chart-card">
             <div class="chart-header">
-              <h3><i class="fa-solid fa-arrows-split-up-and-left"></i> <span>Etapas de Uso Metodológico</span></h3>
-              <button class="btn-chart-export" data-chart="stages" title="Exportar como Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
+              <h3><i class="fa-solid fa-tags"></i> <span>Palavras-chave & Tópicos em Alta</span></h3>
+              <button class="btn-chart-export" data-chart="keywords" title="Exportar Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
             </div>
             <div class="chart-container">
-              <canvas id="chart-stages"></canvas>
-            </div>
-          </div>
-
-          <div class="chart-card">
-            <div class="chart-header">
-              <h3><i class="fa-solid fa-chart-line"></i> <span>Curva de Pareto 80/20 (Adoção de Software)</span></h3>
-              <button class="btn-chart-export" data-chart="pareto" title="Exportar como Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
-            </div>
-            <div class="chart-container">
-              <canvas id="chart-pareto"></canvas>
-            </div>
-          </div>
-
-          <div class="chart-card">
-            <div class="chart-header">
-              <h3><i class="fa-solid fa-layer-group"></i> <span>Evolução Temporal Empilhada de Ferramentas</span></h3>
-              <button class="btn-chart-export" data-chart="temporal" title="Exportar como Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
-            </div>
-            <div class="chart-container">
-              <canvas id="chart-temporal"></canvas>
+              <canvas id="chart-keywords"></canvas>
             </div>
           </div>
         </div>
@@ -305,7 +277,7 @@
           <!-- Sidebar Filters -->
           <div class="filters-sidebar glass-panel">
             <div class="filter-group-header">
-              <i class="fa-solid fa-filter"></i> <span>Filtros Cientométricos</span>
+              <i class="fa-solid fa-filter"></i> <span>Filtros do Acervo</span>
               <button class="btn-clear" id="btn-clear-filters" title="Limpar Filtros"><i class="fa-solid fa-rotate-left"></i></button>
             </div>
 
@@ -315,43 +287,24 @@
             </div>
 
             <div class="filter-section">
-              <label><i class="fa-solid fa-calendar"></i> Edições do Evento (Ano)</label>
+              <label><i class="fa-solid fa-calendar"></i> Edições (Ano)</label>
               <div class="checkbox-group" id="year-checkbox-list">
                 <!-- Populado via JS -->
               </div>
             </div>
 
             <div class="filter-section">
-              <label><i class="fa-solid fa-screwdriver-wrench"></i> Ferramenta / Software</label>
-              <select id="filter-tool" class="filter-select">
-                <option value="">Todas as ferramentas</option>
+              <label><i class="fa-solid fa-user"></i> Autor / Pesquisador</label>
+              <select id="filter-author" class="filter-select">
+                <option value="">Todos os autores</option>
               </select>
             </div>
 
             <div class="filter-section">
-              <label><i class="fa-solid fa-database"></i> Fonte de Dados</label>
-              <select id="filter-source" class="filter-select">
-                <option value="">Todas as fontes</option>
+              <label><i class="fa-solid fa-layer-group"></i> Eixo Temático / Seção</label>
+              <select id="filter-section" class="filter-select">
+                <option value="">Todos os eixos</option>
               </select>
-            </div>
-
-            <div class="filter-section">
-              <label><i class="fa-solid fa-arrows-split-up-and-left"></i> Etapa Metodológica</label>
-              <select id="filter-stage" class="filter-select">
-                <option value="">Todas as etapas</option>
-                <option value="coleta dos dados">Coleta dos Dados</option>
-                <option value="tratamanto">Tratamento dos Dados</option>
-                <option value="organização dos dados">Organização dos Dados</option>
-                <option value="análise dos dados">Análise dos Dados</option>
-                <option value="visualização - geração dos graficos">Visualização / Gráficos</option>
-              </select>
-            </div>
-
-            <div class="filter-section">
-              <label class="checkbox-item">
-                <input type="checkbox" id="filter-has-tool">
-                <span>Apenas com Software Identificado</span>
-              </label>
             </div>
 
             <div class="filter-section" style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
@@ -371,7 +324,7 @@
                 <label for="sort-select"><i class="fa-solid fa-arrow-down-short-wide"></i> Ordenar:</label>
                 <select id="sort-select" class="filter-select">
                   <option value="year">Ano de Edição</option>
-                  <option value="title">Título do Artigo</option>
+                  <option value="title">Título do Trabalho</option>
                   <option value="doi">DOI / ID</option>
                 </select>
                 <button class="btn-icon" id="btn-sort-dir" title="Inverter Ordem"><i class="fa-solid fa-sort-amount-down"></i></button>
@@ -379,7 +332,7 @@
 
               <div class="toolbar-right">
                 <span class="results-count-text">
-                  Mostrando <span id="displayed-count">0</span> de <span id="filtered-count">0</span> artigos
+                  Mostrando <span id="displayed-count">0</span> de <span id="filtered-count">0</span> trabalhos
                 </span>
                 <div class="pagination-controls">
                   <button id="btn-prev" class="btn-icon" disabled><i class="fa-solid fa-chevron-left"></i></button>
@@ -398,32 +351,7 @@
         </div>
       </section>
 
-      <!-- 3. CORRELATIONS TAB -->
-      <section id="correlations-tab" class="tab-panel">
-        <div class="charts-grid">
-          <div class="chart-card">
-            <div class="chart-header">
-              <h3><i class="fa-solid fa-table-cells"></i> <span>Matriz de Coocorrência (Softwares × Fontes)</span></h3>
-              <button class="btn-chart-export" data-chart="heatmap" title="Exportar como Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
-            </div>
-            <div class="chart-container">
-              <canvas id="chart-heatmap-matrix"></canvas>
-            </div>
-          </div>
-
-          <div class="chart-card">
-            <div class="chart-header">
-              <h3><i class="fa-solid fa-chart-line"></i> <span>Dispersão: Autores × Diversidade Metodológica</span></h3>
-              <button class="btn-chart-export" data-chart="scatter" title="Exportar como Imagem PNG"><i class="fa-solid fa-download"></i> PNG</button>
-            </div>
-            <div class="chart-container">
-              <canvas id="chart-scatter-plot"></canvas>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4. DOCS & API SANDBOX TAB -->
+      <!-- 3. DOCS & API SANDBOX TAB -->
       <section id="docs-tab" class="tab-panel">
         <div class="sandbox-card glass-panel" style="margin-bottom: 1.5rem;">
           <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
@@ -444,10 +372,6 @@
               <select id="playground-endpoint-select" class="filter-select" style="font-family: var(--font-mono); font-weight: 600; flex: 1; min-width: 260px;">
                 <option value="/api/v1/articles?limit=5">GET /api/v1/articles?limit=5 (Listagem Paginada)</option>
                 <option value="/api/v1/articles/stats">GET /api/v1/articles/stats (Estatísticas Consolidadas)</option>
-                <option value="/api/v1/articles/stats/correlations">GET /api/v1/articles/stats/correlations (Matriz Coocorrência)</option>
-                <option value="/api/v1/articles/stats/scatter">GET /api/v1/articles/stats/scatter (Dispersão Metodológica)</option>
-                <option value="/api/v1/articles/stats/temporal">GET /api/v1/articles/stats/temporal (Distribuição Temporal)</option>
-                <option value="/api/v1/articles/stats/pareto">GET /api/v1/articles/stats/pareto (Análise Bradford / Pareto)</option>
                 <option value="/api/v1/config">GET /api/v1/config (Configuração do Dataset)</option>
               </select>
               <button class="btn btn-primary" id="btn-execute-api">
@@ -462,7 +386,7 @@
               <select id="sandbox-lang" class="filter-select">
                 <option value="curl">cURL (Terminal / Shell)</option>
                 <option value="javascript">JavaScript (Fetch API)</option>
-                <option value="python">Python (Requests / Pandas)</option>
+                <option value="python">Python (Requests)</option>
                 <option value="node">Node.js (Axios)</option>
                 <option value="r">R (httr & jsonlite)</option>
               </select>
@@ -483,7 +407,6 @@
               <li><a href="#" class="docs-menu-link active" data-doc="doc-articles"><span class="badge-method get">GET</span> <span>/articles</span></a></li>
               <li><a href="#" class="docs-menu-link" data-doc="doc-article-key"><span class="badge-method get">GET</span> <span>/articles/:key</span></a></li>
               <li><a href="#" class="docs-menu-link" data-doc="doc-stats"><span class="badge-method get">GET</span> <span>/articles/stats</span></a></li>
-              <li><a href="#" class="docs-menu-link" data-doc="doc-correlations"><span class="badge-method get">GET</span> <span>/stats/correlations</span></a></li>
               <li><a href="#" class="docs-menu-link" data-doc="doc-export"><span class="badge-method get">GET</span> <span>/export</span></a></li>
               <li><a href="#" class="docs-menu-link" data-doc="doc-config"><span class="badge-method get">GET</span> <span>/config</span></a></li>
             </ul>
@@ -496,35 +419,7 @@
                 <span class="badge-method get">GET</span>
                 <span class="endpoint-path">/api/v1/articles</span>
               </div>
-              <p class="doc-intro">Retorna a lista paginada de artigos com suporte a múltiplos filtros cientométricos, ordenação flexível e busca textual global.</p>
-              
-              <h4>Parâmetros de Query String</h4>
-              <table class="doc-table" style="width: 100%; font-size: 0.8rem; border-collapse: collapse; margin-top: 0.5rem;">
-                <thead>
-                  <tr style="text-align: left; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
-                    <th style="padding: 0.5rem;">Parâmetro</th>
-                    <th style="padding: 0.5rem;">Tipo</th>
-                    <th style="padding: 0.5rem;">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <td style="padding: 0.5rem; font-family: var(--font-mono); color: #3064ff;">search</td>
-                    <td style="padding: 0.5rem; font-family: var(--font-mono);">string</td>
-                    <td style="padding: 0.5rem;">Busca textual sem diferenciação de acentos em títulos, resumos e autores.</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <td style="padding: 0.5rem; font-family: var(--font-mono); color: #3064ff;">year</td>
-                    <td style="padding: 0.5rem; font-family: var(--font-mono);">string</td>
-                    <td style="padding: 0.5rem;">Filtra edições específicas separadas por vírgula (ex: <code>2022,2024</code>).</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <td style="padding: 0.5rem; font-family: var(--font-mono); color: #3064ff;">tool</td>
-                    <td style="padding: 0.5rem; font-family: var(--font-mono);">string</td>
-                    <td style="padding: 0.5rem;">Filtra pesquisas que utilizaram o software especificado (ex: <code>VOSviewer</code>).</td>
-                  </tr>
-                </tbody>
-              </table>
+              <p class="doc-intro">Retorna a lista paginada de trabalhos com suporte a múltiplos filtros, ordenação flexível e busca textual global.</p>
             </div>
 
             <!-- Doc 2: Article By Key -->
@@ -542,16 +437,7 @@
                 <span class="badge-method get">GET</span>
                 <span class="endpoint-path">/api/v1/articles/stats</span>
               </div>
-              <p class="doc-intro">Retorna agregados consolidados, taxas de adoção de software, top 10 ferramentas/fontes e distribuições históricas.</p>
-            </div>
-
-            <!-- Doc 4: Correlations -->
-            <div class="doc-card glass-panel" id="doc-correlations">
-              <div class="endpoint-header">
-                <span class="badge-method get">GET</span>
-                <span class="endpoint-path">/api/v1/articles/stats/correlations</span>
-              </div>
-              <p class="doc-intro">Calcula a Matriz de Coocorrência 2D em tempo real entre ferramentas de software e fontes de coleta de dados.</p>
+              <p class="doc-intro">Retorna agregados consolidados, distribuições históricas por ano, top autores, seções e palavras-chave.</p>
             </div>
 
             <!-- Doc 5: Export -->
@@ -585,7 +471,7 @@
         </div>
         <div class="footer-right">
           <a href="https://github.com/BRAN-Org/bran-web-database-template/issues" target="_blank" id="footer-issues-link">
-            <i class="fa-solid fa-circle-exclamation"></i> Problemas / Issues / Dúvidas?
+            <i class="fa-solid fa-circle-exclamation"></i> Dúvidas / Issues?
           </a>
           <a href="https://github.com/BRAN-Org/bran-web-database-template" target="_blank" id="footer-github-link">
             <i class="fa-brands fa-github"></i> GitHub
@@ -605,7 +491,7 @@
       <button class="modal-close" id="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
       
       <span class="badge-year" id="modal-year">2024</span>
-      <h2 class="modal-title" id="modal-title">Título do Artigo</h2>
+      <h2 class="modal-title" id="modal-title">Título do Trabalho</h2>
       <p class="modal-authors" id="modal-authors">Autores</p>
 
       <div class="modal-section">
@@ -614,13 +500,13 @@
       </div>
 
       <div class="modal-section">
-        <h4>Ferramentas Utilizadas</h4>
-        <div id="modal-tools" class="badge-list">Nenhuma ferramenta detectada</div>
+        <h4>Eixo Temático / Seção</h4>
+        <div id="modal-sections" class="badge-list">N/A</div>
       </div>
 
       <div class="modal-section">
-        <h4>Fontes de Coleta de Dados</h4>
-        <div id="modal-sources" class="badge-list">N/A</div>
+        <h4>Palavras-chave / Tópicos</h4>
+        <div id="modal-keywords" class="badge-list">N/A</div>
       </div>
 
       <!-- Gerador de Citações Científicas -->
@@ -637,9 +523,12 @@
         </div>
       </div>
 
-      <div class="modal-section" style="margin-top: 24px;">
+      <div class="modal-section" style="margin-top: 24px; display: flex; gap: 0.75rem; flex-wrap: wrap;">
         <a href="#" id="modal-doi-link" target="_blank" class="btn btn-primary" style="display: inline-block; text-decoration: none;">
-          <i class="fa-solid fa-external-link"></i> Acessar DOI Oficial
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar Publicação
+        </a>
+        <a href="#" id="modal-pdf-link" target="_blank" class="btn btn-secondary" style="display: none; text-decoration: none; background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #f87171;">
+          <i class="fa-solid fa-file-pdf"></i> Baixar PDF
         </a>
       </div>
     </div>

@@ -1,7 +1,8 @@
 /**
  * Componente de Gráficos Leves em Canvas HTML5 (Zero-Dependency)
  * Visual OS inspirado em simeon.sh com fonte Geist & Geist Mono.
- * Suporta alternância de paletas (Simeon, Apple, Monocromático, Neon, Pastel) e tipos de gráfico (Barras, Linhas, Radar, Pareto, Empilhado).
+ * Suporta tooltips responsivos no mouse-hover (com texto completo)
+ * e exportação PNG de alta resolução com Nomes Completos (sem truncamento ..).
  */
 export class SimpleChart {
   constructor(canvasId) {
@@ -10,6 +11,14 @@ export class SimpleChart {
     this.ctx = this.canvas.getContext('2d');
     this.palette = 'simeon';
     this.chartType = 'bar';
+    this.lastData = null;
+    this.lastLabelKey = 'name';
+    this.lastValueKey = 'count';
+    this.hoverIndex = -1;
+    this.barBounds = []; // Guarda as coordenadas das barras para interatividade do mouse
+
+    this.initTooltip();
+    this.initMouseEvents();
   }
 
   setPalette(paletteName) {
@@ -33,6 +42,98 @@ export class SimpleChart {
       case 'simeon':
       default:
         return ['#ffffff', '#3064ff', '#30d158', '#ff9f0a', '#fe257f', '#b59aff'];
+    }
+  }
+
+  initTooltip() {
+    let tooltip = document.getElementById('chart-global-tooltip');
+    if (!tooltip) {
+      tooltip = document.createElement('div');
+      tooltip.id = 'chart-global-tooltip';
+      tooltip.style.cssText = `
+        position: absolute;
+        display: none;
+        pointer-events: none;
+        background: rgba(12, 16, 24, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        color: #ffffff;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-family: "Geist Mono", monospace;
+        font-size: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        z-index: 99999;
+        transition: opacity 0.1s ease;
+        max-width: 320px;
+        word-break: break-word;
+      `;
+      document.body.appendChild(tooltip);
+    }
+    this.tooltip = tooltip;
+  }
+
+  initMouseEvents() {
+    if (!this.canvas) return;
+
+    this.canvas.addEventListener('mousemove', (e) => {
+      if (!this.barBounds || this.barBounds.length === 0) return;
+
+      const rect = this.canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      let foundIndex = -1;
+      for (let i = 0; i < this.barBounds.length; i++) {
+        const b = this.barBounds[i];
+        if (mouseX >= b.x && mouseX <= b.x + b.w && mouseY >= b.y && mouseY <= b.y + b.h) {
+          foundIndex = i;
+          break;
+        }
+      }
+
+      if (foundIndex !== -1) {
+        const bound = this.barBounds[foundIndex];
+        this.canvas.style.cursor = 'pointer';
+        this.showTooltip(e.pageX, e.pageY, bound.fullLabel, bound.val);
+
+        if (this.hoverIndex !== foundIndex) {
+          this.hoverIndex = foundIndex;
+          this.render(this.lastData, this.lastLabelKey, this.lastValueKey);
+        }
+      } else {
+        this.canvas.style.cursor = 'default';
+        this.hideTooltip();
+        if (this.hoverIndex !== -1) {
+          this.hoverIndex = -1;
+          this.render(this.lastData, this.lastLabelKey, this.lastValueKey);
+        }
+      }
+    });
+
+    this.canvas.addEventListener('mouseleave', () => {
+      this.canvas.style.cursor = 'default';
+      this.hideTooltip();
+      if (this.hoverIndex !== -1) {
+        this.hoverIndex = -1;
+        this.render(this.lastData, this.lastLabelKey, this.lastValueKey);
+      }
+    });
+  }
+
+  showTooltip(pageX, pageY, fullLabel, val) {
+    if (!this.tooltip) return;
+    this.tooltip.innerHTML = `<div style="font-weight: 700; color: #30d158; margin-bottom: 2px;">${val} trabalho(s)</div><div style="color: #e2e8f0; line-height: 1.3;">${this.escapeHtml(fullLabel)}</div>`;
+    this.tooltip.style.left = `${pageX + 14}px`;
+    this.tooltip.style.top = `${pageY + 14}px`;
+    this.tooltip.style.display = 'block';
+    this.tooltip.style.opacity = '1';
+  }
+
+  hideTooltip() {
+    if (this.tooltip) {
+      this.tooltip.style.display = 'none';
+      this.tooltip.style.opacity = '0';
     }
   }
 
@@ -62,6 +163,9 @@ export class SimpleChart {
 
   render(data, labelKey = 'name', valueKey = 'count') {
     if (!this.ctx || !data) return;
+    this.lastData = data;
+    this.lastLabelKey = labelKey;
+    this.lastValueKey = valueKey;
 
     if (this.chartType === 'radar') {
       this.renderRadarChart(data, labelKey, valueKey);
@@ -80,25 +184,39 @@ export class SimpleChart {
     const items = Array.isArray(data) ? data : Object.entries(data).map(([name, count]) => ({ name, count }));
     if (items.length === 0) return;
 
+    this.barBounds = [];
     const colors = this.getPaletteColors();
     const maxVal = Math.max(...items.map(d => d[valueKey] || d.count || 0), 1);
     const barHeight = Math.min(24, Math.floor((height - 20) / items.length - 6));
-    const startX = Math.min(130, Math.floor(width * 0.28));
+    const startX = Math.min(145, Math.floor(width * 0.32));
     const rightMargin = 45;
     const chartWidth = Math.max(width - startX - rightMargin, 50);
 
     items.forEach((item, index) => {
-      const label = String(item[labelKey] || item.name || '');
+      const fullLabel = String(item[labelKey] || item.name || '');
       const val = item[valueKey] ?? item.count ?? 0;
       const y = 10 + index * (barHeight + 6);
       const barW = Math.min((val / maxVal) * chartWidth, chartWidth);
 
-      // Label
-      ctx.fillStyle = '#8a9390';
-      ctx.font = '500 11px "Geist Mono", monospace';
+      // Salvar limites para mouse hover em toda a linha
+      this.barBounds.push({
+        x: 0,
+        y: y - 2,
+        w: width,
+        h: barHeight + 4,
+        fullLabel,
+        val,
+        index
+      });
+
+      const isHovered = this.hoverIndex === index;
+
+      // Label (com truncamento suave na tela para caber no grid)
+      ctx.fillStyle = isHovered ? '#ffffff' : '#8a9390';
+      ctx.font = isHovered ? '600 11px "Geist Mono", monospace' : '500 11px "Geist Mono", monospace';
       ctx.textAlign = 'right';
       ctx.textBaseline = 'middle';
-      const truncatedLabel = label.length > 16 ? label.substring(0, 14) + '..' : label;
+      const truncatedLabel = fullLabel.length > 17 ? fullLabel.substring(0, 15) + '..' : fullLabel;
       ctx.fillText(truncatedLabel, startX - 8, y + barHeight / 2);
 
       // Track
@@ -111,10 +229,16 @@ export class SimpleChart {
       if (barW > 0) {
         this.drawRoundedRect(startX, y, Math.max(barW, 4), barHeight, 4);
         ctx.fill();
+
+        if (isHovered) {
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        }
       }
 
       // Value text
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = isHovered ? '#30d158' : '#ffffff';
       ctx.font = '700 11px "Geist Mono", monospace';
       ctx.textAlign = 'left';
       ctx.fillText(String(val), startX + barW + 6, y + barHeight / 2);
@@ -129,6 +253,7 @@ export class SimpleChart {
     const items = Array.isArray(data) ? data : Object.entries(data).map(([name, count]) => ({ name, count }));
     if (items.length === 0) return;
 
+    this.barBounds = [];
     const colors = this.getPaletteColors();
     const padding = 40;
     const chartW = Math.max(width - padding * 2, 50);
@@ -141,26 +266,39 @@ export class SimpleChart {
 
     const points = [];
     items.forEach((item, idx) => {
-      const label = item[labelKey] || item.name || '';
+      const fullLabel = String(item[labelKey] || item.name || '');
       const val = item[valueKey] ?? item.count ?? 0;
       const x = padding + (idx / (items.length - 1 || 1)) * chartW;
       const y = height - padding - (val / maxVal) * chartH;
-      points.push({ x, y, label, val });
+      points.push({ x, y, fullLabel, val, index: idx });
+
+      this.barBounds.push({
+        x: x - 15,
+        y: 0,
+        w: 30,
+        h: height,
+        fullLabel,
+        val,
+        index: idx
+      });
+
       if (idx === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     });
     ctx.stroke();
 
     points.forEach(p => {
-      ctx.fillStyle = colors[1] || colors[0];
+      const isHovered = this.hoverIndex === p.index;
+      ctx.fillStyle = isHovered ? '#ffffff' : (colors[1] || colors[0]);
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, isHovered ? 7 : 5, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = '#8a9390';
+      ctx.fillStyle = isHovered ? '#ffffff' : '#8a9390';
       ctx.font = '500 11px "Geist Mono", monospace';
       ctx.textAlign = 'center';
-      ctx.fillText(String(p.label), p.x, height - 15);
+      const truncated = p.fullLabel.length > 10 ? p.fullLabel.substring(0, 8) + '..' : p.fullLabel;
+      ctx.fillText(truncated, p.x, height - 15);
       ctx.fillText(String(p.val), p.x, p.y - 10);
     });
   }
@@ -173,6 +311,7 @@ export class SimpleChart {
     const items = Array.isArray(data) ? data : Object.entries(data).map(([name, count]) => ({ name, count }));
     if (items.length === 0) return;
 
+    this.barBounds = [];
     const colors = this.getPaletteColors();
     const centerX = width / 2;
     const centerY = height / 2;
@@ -180,7 +319,6 @@ export class SimpleChart {
     const total = items.length;
     const maxVal = Math.max(...items.map(d => d[valueKey] || d.count || 0), 1);
 
-    // Grid circles
     for (let r = 1; r <= 3; r++) {
       const rad = (radius / 3) * r;
       ctx.beginPath();
@@ -189,18 +327,27 @@ export class SimpleChart {
       ctx.stroke();
     }
 
-    // Points
     const points = [];
     items.forEach((item, i) => {
       const angle = (Math.PI * 2 / total) * i - Math.PI / 2;
       const val = item[valueKey] ?? item.count ?? 0;
+      const fullLabel = String(item[labelKey] || item.name || '');
       const dist = (val / maxVal) * radius;
       const x = centerX + Math.cos(angle) * dist;
       const y = centerY + Math.sin(angle) * dist;
-      points.push({ x, y, label: item[labelKey] || item.name, angle, dist });
+      points.push({ x, y, fullLabel, angle, dist, val, index: i });
+
+      this.barBounds.push({
+        x: x - 15,
+        y: y - 15,
+        w: 30,
+        h: 30,
+        fullLabel,
+        val,
+        index: i
+      });
     });
 
-    // Polygon
     ctx.beginPath();
     ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
     ctx.strokeStyle = colors[0];
@@ -214,264 +361,148 @@ export class SimpleChart {
     ctx.fill();
     ctx.stroke();
 
-    // Labels
     points.forEach(p => {
       const lx = centerX + Math.cos(p.angle) * (radius + 18);
       const ly = centerY + Math.sin(p.angle) * (radius + 18);
-      ctx.fillStyle = '#8a9390';
-      ctx.font = '500 11px "Geist Mono", monospace';
+      const isHovered = this.hoverIndex === p.index;
+
+      ctx.fillStyle = isHovered ? '#ffffff' : '#8a9390';
+      ctx.font = isHovered ? '600 11px "Geist Mono", monospace' : '500 11px "Geist Mono", monospace';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(String(p.label).substring(0, 10), lx, ly);
+      const truncated = p.fullLabel.length > 10 ? p.fullLabel.substring(0, 8) + '..' : p.fullLabel;
+      ctx.fillText(truncated, lx, ly);
     });
   }
 
-  renderPareto(data) {
-    const items = data?.items || data?.data;
-    if (!this.ctx || !data || !items || items.length === 0) return;
-    const { ctx } = this;
-    const { width, height } = this.setupCanvas();
-    ctx.clearRect(0, 0, width, height);
+  /**
+   * EXPORTAÇÃO PNG DE ALTA RESOLUÇÃO COM NOMES 100% COMPLETOS (SEM TRUNCAMENTO)
+   */
+  exportPNG(chartTitle = 'Gráfico Estatístico', filename = 'grafico-estatistico.png') {
+    if (!this.lastData) return;
 
-    const paddingLeft = 50;
-    const paddingRight = 50;
-    const paddingTop = 30;
-    const paddingBottom = 40;
+    const data = this.lastData;
+    const items = Array.isArray(data) ? data : Object.entries(data).map(([name, count]) => ({ name, count }));
+    if (items.length === 0) return;
 
-    const chartW = Math.max(width - paddingLeft - paddingRight, 50);
-    const chartH = Math.max(height - paddingTop - paddingBottom, 50);
-    const maxVal = Math.max(...items.map(d => d.count), 1);
+    // Criar canvas offscreen de alta definição (1400px x 800px)
+    const offCanvas = document.createElement('canvas');
+    const exportWidth = 1400;
+    const exportHeight = 120 + items.length * 48 + 80;
+    offCanvas.width = exportWidth;
+    offCanvas.height = exportHeight;
 
-    const barW = (chartW / items.length) * 0.55;
-    const colors = this.getPaletteColors();
+    const ctx = offCanvas.getContext('2d');
 
-    // Bar chart (Individual counts)
-    items.forEach((item, i) => {
-      const x = paddingLeft + (i / items.length) * chartW + (chartW / items.length - barW) / 2;
-      const barH = (item.count / maxVal) * chartH;
-      const y = height - paddingBottom - barH;
+    // Fundo escuro premium
+    ctx.fillStyle = '#0b0f17';
+    ctx.fillRect(0, 0, exportWidth, exportHeight);
 
-      ctx.fillStyle = colors[i % colors.length];
-      this.drawRoundedRect(x, y, barW, barH, 4);
-      ctx.fill();
-
-      // Label
-      ctx.fillStyle = '#8a9390';
-      ctx.font = '500 10px "Geist Mono", monospace';
-      ctx.textAlign = 'center';
-      ctx.fillText(item.name.substring(0, 8), x + barW / 2, height - paddingBottom + 16);
-    });
-
-    // Cumulative line
-    ctx.beginPath();
-    ctx.strokeStyle = '#fe257f';
-    ctx.lineWidth = 2.5;
-
-    items.forEach((item, i) => {
-      const x = paddingLeft + (i / items.length) * chartW + (chartW / items.length) / 2;
-      const pct = item.cumulativePercentage ?? item.cumulativePercent ?? 0;
-      const y = height - paddingBottom - (pct / 100) * chartH;
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    });
+    // Borda elegante
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.lineWidth = 2;
+    this.drawRoundedRectOnCtx(ctx, 16, 16, exportWidth - 32, exportHeight - 32, 12);
     ctx.stroke();
 
-    // 80% line
-    const y80 = height - paddingBottom - 0.8 * chartH;
-    ctx.setLineDash([4, 4]);
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    // Título do Gráfico no PNG
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '700 24px "Geist Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(chartTitle, 40, 56);
+
+    ctx.fillStyle = '#8a9390';
+    ctx.font = '500 14px "Geist Mono", monospace';
+    ctx.fillText('BRAN Org OpenData OS — FAIR & BOAI Open Access', 40, 84);
+
+    // Linha divisória
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
     ctx.beginPath();
-    ctx.moveTo(paddingLeft, y80);
-    ctx.lineTo(width - paddingRight, y80);
+    ctx.moveTo(40, 102);
+    ctx.lineTo(exportWidth - 40, 102);
     ctx.stroke();
-    ctx.setLineDash([]);
 
-    ctx.fillStyle = '#fe257f';
-    ctx.font = '600 10px "Geist Mono", monospace';
-    ctx.textAlign = 'right';
-    ctx.fillText('80% Pareto', width - paddingRight, y80 - 6);
-  }
+    // Encontrar o maior comprimento de texto em pixels para calcular o recuo ideal (zero truncamento)
+    ctx.font = '500 15px "Geist Mono", monospace';
+    let maxLabelWidth = 180;
+    items.forEach(item => {
+      const fullLabel = String(item[this.lastLabelKey] || item.name || '');
+      const measured = ctx.measureText(fullLabel).width;
+      if (measured > maxLabelWidth) maxLabelWidth = measured;
+    });
 
-  renderTemporalStacked(data) {
-    if (!this.ctx || !data || !data.years || !data.series) return;
-    const { ctx } = this;
-    const { width, height } = this.setupCanvas();
-    ctx.clearRect(0, 0, width, height);
-
-    const { years, series } = data;
-    if (years.length === 0 || series.length === 0) return;
-
-    const paddingLeft = 50;
-    const paddingRight = 20;
-    const paddingTop = 30;
-    const paddingBottom = 40;
-
-    const chartW = Math.max(width - paddingLeft - paddingRight, 50);
-    const chartH = Math.max(height - paddingTop - paddingBottom, 50);
+    const startX = Math.min(Math.max(260, Math.ceil(maxLabelWidth + 60)), 500);
+    const rightMargin = 80;
+    const chartWidth = exportWidth - startX - rightMargin;
     const colors = this.getPaletteColors();
+    const maxVal = Math.max(...items.map(d => d[this.lastValueKey] || d.count || 0), 1);
+    const barH = 32;
 
-    const getValue = (item) => {
-      if (typeof item === 'number') return item;
-      if (item && typeof item === 'object') return item.count ?? item.percentage ?? 0;
-      return 0;
-    };
+    items.forEach((item, index) => {
+      const fullLabel = String(item[this.lastLabelKey] || item.name || '');
+      const val = item[this.lastValueKey] ?? item.count ?? 0;
+      const y = 125 + index * (barH + 14);
+      const barW = Math.min((val / maxVal) * chartWidth, chartWidth);
 
-    const yearlyTotals = years.map((_, yIdx) => {
-      return series.reduce((sum, s) => sum + getValue(s.data[yIdx]), 0);
-    });
-    const maxVal = Math.max(...yearlyTotals, 1);
-
-    const groupW = chartW / years.length;
-    const barW = groupW * 0.6;
-
-    years.forEach((yr, yIdx) => {
-      let currentY = height - paddingBottom;
-      const x = paddingLeft + yIdx * groupW + (groupW - barW) / 2;
-
-      series.forEach((s, sIdx) => {
-        const val = getValue(s.data[yIdx]);
-        const sliceH = (val / maxVal) * chartH;
-        currentY -= sliceH;
-
-        if (sliceH > 0) {
-          ctx.fillStyle = colors[sIdx % colors.length];
-          this.drawRoundedRect(x, currentY, barW, sliceH, 2);
-          ctx.fill();
-        }
-      });
-
-      // Year Label
-      ctx.fillStyle = '#8a9390';
-      ctx.font = '500 11px "Geist Mono", monospace';
-      ctx.textAlign = 'center';
-      ctx.fillText(String(yr), x + barW / 2, height - paddingBottom + 18);
-    });
-  }
-
-  renderHeatmapMatrix(data) {
-    if (!this.ctx || !data || !data.rows || !data.cols) return;
-    const { ctx } = this;
-    const { width, height } = this.setupCanvas();
-    ctx.clearRect(0, 0, width, height);
-
-    const { rows, cols, matrix } = data;
-    if (rows.length === 0 || cols.length === 0) return;
-
-    const startX = 120;
-    const startY = 40;
-    const cellW = (width - startX - 20) / cols.length;
-    const cellH = (height - startY - 20) / rows.length;
-
-    let maxVal = 1;
-    rows.forEach(r => cols.forEach(c => { if (matrix[r][c] > maxVal) maxVal = matrix[r][c]; }));
-
-    cols.forEach((col, j) => {
-      ctx.fillStyle = '#8a9390';
-      ctx.font = '600 11px "Geist Mono", monospace';
-      ctx.textAlign = 'center';
-      ctx.fillText(col.substring(0, 10), startX + j * cellW + cellW / 2, startY - 12);
-    });
-
-    rows.forEach((row, i) => {
-      ctx.fillStyle = '#8a9390';
-      ctx.font = '600 11px "Geist Mono", monospace';
+      // Nome 100% Completo
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '500 15px "Geist Mono", monospace';
       ctx.textAlign = 'right';
       ctx.textBaseline = 'middle';
-      ctx.fillText(row.substring(0, 14), startX - 10, startY + i * cellH + cellH / 2);
+      ctx.fillText(fullLabel, startX - 16, y + barH / 2);
 
-      cols.forEach((col, j) => {
-        const count = matrix[row][col] || 0;
-        const alpha = Math.max(0.06, count / maxVal);
-        
-        ctx.fillStyle = `rgba(48, 209, 88, ${alpha})`;
-        this.drawRoundedRect(startX + j * cellW + 2, startY + i * cellH + 2, cellW - 4, cellH - 4, 4);
-        ctx.fill();
-
-        if (count > 0) {
-          ctx.fillStyle = count / maxVal > 0.5 ? '#ffffff' : '#8a9390';
-          ctx.font = '700 12px "Geist Mono", monospace';
-          ctx.textAlign = 'center';
-          ctx.fillText(String(count), startX + j * cellW + cellW / 2, startY + i * cellH + cellH / 2);
-        }
-      });
-    });
-  }
-
-  renderScatterPlot(data) {
-    if (!this.ctx || !data || !data.points) return;
-    const { ctx } = this;
-    const { width, height } = this.setupCanvas();
-    ctx.clearRect(0, 0, width, height);
-
-    const padding = 45;
-    const chartW = Math.max(width - padding * 2, 50);
-    const chartH = Math.max(height - padding * 2, 50);
-    const points = data.points;
-    if (points.length === 0) return;
-
-    const maxX = Math.max(...points.map(p => p.x), 5);
-    const maxY = Math.max(...points.map(p => p.y), 5);
-
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(padding, padding);
-    ctx.lineTo(padding, height - padding);
-    ctx.lineTo(width - padding, height - padding);
-    ctx.stroke();
-
-    points.forEach(p => {
-      const cx = padding + (p.x / maxX) * chartW;
-      const cy = height - padding - (p.y / maxY) * chartH;
-
-      ctx.fillStyle = 'rgba(48, 100, 255, 0.7)';
-      ctx.beginPath();
-      ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+      // Track de fundo
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+      this.drawRoundedRectOnCtx(ctx, startX, y, chartWidth, barH, 6);
       ctx.fill();
-      ctx.strokeStyle = '#ffffff';
-      ctx.stroke();
+
+      // Barra colorida
+      ctx.fillStyle = colors[index % colors.length];
+      if (barW > 0) {
+        this.drawRoundedRectOnCtx(ctx, startX, y, Math.max(barW, 6), barH, 6);
+        ctx.fill();
+      }
+
+      // Valor no PNG
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 16px "Geist Mono", monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText(`${val} trabalho(s)`, startX + barW + 12, y + barH / 2);
     });
 
-    if (data.slope !== undefined && data.intercept !== undefined) {
-      const x1 = 0;
-      const y1 = data.intercept;
-      const x2 = maxX;
-      const y2 = data.slope * maxX + data.intercept;
+    // Rodapé de marca d'água no PNG
+    ctx.fillStyle = '#64748b';
+    ctx.font = '500 13px "Geist Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('Gerado via BRAN Org OpenData Platform (https://github.com/BRAN-Org)', exportWidth / 2, exportHeight - 28);
 
-      const px1 = padding + (x1 / maxX) * chartW;
-      const py1 = height - padding - Math.min(Math.max(y1, 0), maxY) / maxY * chartH;
-      const px2 = padding + (x2 / maxX) * chartW;
-      const py2 = height - padding - Math.min(Math.max(y2, 0), maxY) / maxY * chartH;
-
-      ctx.strokeStyle = '#30d158';
-      ctx.lineWidth = 2;
-      ctx.setLineDash([4, 4]);
-      ctx.beginPath();
-      ctx.moveTo(px1, py1);
-      ctx.lineTo(px2, py2);
-      ctx.stroke();
-      ctx.setLineDash([]);
-    }
-  }
-
-  exportPNG(filename = 'grafico-estatistico.png') {
-    if (!this.canvas) return;
+    // Download da imagem PNG
     const link = document.createElement('a');
     link.download = filename;
-    link.href = this.canvas.toDataURL('image/png');
+    link.href = offCanvas.toDataURL('image/png');
     link.click();
   }
 
-  drawRoundedRect(x, y, w, h, r) {
+  drawRoundedRectOnCtx(targetCtx, x, y, w, h, r) {
     if (w < 2 * r) r = w / 2;
     if (h < 2 * r) r = h / 2;
-    const { ctx } = this;
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.arcTo(x + w, y, x + w, y + h, r);
-    ctx.arcTo(x + w, y + h, x, y + h, r);
-    ctx.arcTo(x, y + h, x, y, r);
-    ctx.arcTo(x, y, x + w, y, r);
-    ctx.closePath();
+    targetCtx.beginPath();
+    targetCtx.moveTo(x + r, y);
+    targetCtx.arcTo(x + w, y, x + w, y + h, r);
+    targetCtx.arcTo(x + w, y + h, x, y + h, r);
+    targetCtx.arcTo(x, y + h, x, y, r);
+    targetCtx.arcTo(x, y, x + w, y, r);
+    targetCtx.closePath();
+  }
+
+  drawRoundedRect(x, y, w, h, r) {
+    this.drawRoundedRectOnCtx(this.ctx, x, y, w, h, r);
+  }
+
+  escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
   }
 }
