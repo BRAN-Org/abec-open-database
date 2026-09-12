@@ -67,17 +67,23 @@ function applyConfigToUI(config) {
   const footerInst = document.getElementById('footer-inst-name');
   if (footerInst) footerInst.textContent = '';
 
-  // Badges & External Links
+  // Badges & External Links (Exibe DOI APENAS se um DOI valido for fornecido)
   const doiText = document.getElementById('badge-doi-text');
   const doiLink = document.getElementById('badge-doi-link');
   const footerDoi = document.getElementById('footer-doi-link');
 
-  if (config.dataset?.doi) {
-    const cleanDoi = config.dataset.doi.replace('https://doi.org/', '');
-    const doiHref = config.dataset.doi.startsWith('http') ? config.dataset.doi : `https://doi.org/${config.dataset.doi}`;
+  const rawDoi = config.dataset?.doi || config.organization?.doiUrl || '';
+  const isValidDoi = rawDoi && !rawDoi.includes('0000000') && rawDoi.trim() !== '';
+
+  if (isValidDoi) {
+    const cleanDoi = rawDoi.replace('https://doi.org/', '');
+    const doiHref = rawDoi.startsWith('http') ? rawDoi : `https://doi.org/${rawDoi}`;
     if (doiText) doiText.innerHTML = `<i class="fa-solid fa-link"></i> DOI: ${cleanDoi}`;
-    if (doiLink) doiLink.href = doiHref;
-    if (footerDoi) footerDoi.href = doiHref;
+    if (doiLink) { doiLink.href = doiHref; doiLink.style.display = 'inline-flex'; }
+    if (footerDoi) { footerDoi.href = doiHref; footerDoi.style.display = 'inline-block'; }
+  } else {
+    if (doiLink) doiLink.style.display = 'none';
+    if (footerDoi) footerDoi.style.display = 'none';
   }
 
   const githubLink = document.getElementById('badge-github-link');

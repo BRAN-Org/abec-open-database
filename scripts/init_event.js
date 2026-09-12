@@ -35,14 +35,17 @@ function initEventReadme() {
 
   let readmeContent = readFileSync(templateReadmePath, 'utf8');
 
+  const hasDoi = dataset.doi && !dataset.doi.includes('0000000') && dataset.doi.trim() !== '';
+  const doiUrl = org.doiUrl || (hasDoi ? `https://doi.org/${dataset.doi}` : '');
+  const doiLine = hasDoi ? `- **DOI Oficial**: [${dataset.doi}](${doiUrl})` : '';
+
   const replacements = {
     '{{DATASET_TITLE}}': dataset.title || 'BRAN Academic Database',
     '{{DATASET_DESCRIPTION}}': dataset.description || 'Base de dados acadêmica aberta.',
     '{{INSTITUTION_NAME}}': org.institutionName || 'BRAN Org',
     '{{ENTITY_NAME}}': dataset.entityName || 'articles',
     '{{DATASET_LICENSE}}': dataset.license || 'MIT / CC-BY 4.0',
-    '{{DATASET_DOI}}': dataset.doi || '10.5281/zenodo.0000000',
-    '{{DOI_URL}}': org.doiUrl || `https://doi.org/${dataset.doi || '10.5281/zenodo.0000000'}`,
+    '{{DOI_LINE}}': doiLine,
     '{{ORG_URL}}': org.url || 'https://github.com/BRAN-Org',
     '{{REPO_URL}}': org.githubUrl || 'https://github.com/BRAN-Org/bran-web-database-template',
     '{{REPO_NAME}}': (org.githubUrl || 'bran-web-database-template').split('/').pop(),

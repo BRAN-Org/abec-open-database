@@ -17,7 +17,7 @@
 - **Entidade Principal**: `{{ENTITY_NAME}}`
 - **Total de Registros**: Configurado e indexado dinamicamente
 - **Licença dos Dados**: {{DATASET_LICENSE}}
-- **DOI Oficial**: [{{DATASET_DOI}}]({{DOI_URL}})
+{{DOI_LINE}}
 - **Manutenção & Suporte**: [BRAN Org]({{ORG_URL}})
 
 ---

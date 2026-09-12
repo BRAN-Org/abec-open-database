@@ -5,14 +5,14 @@
     "logo": "https://avatars.githubusercontent.com/u/328064865?v=4",
     "institutionName": "ABEC Brasil - Associação Brasileira de Editores Científicos",
     "githubUrl": "https://github.com/BRAN-Org/abec-open-database",
-    "doiUrl": "https://doi.org/10.21452/abecmeeting",
+    "doiUrl": "",
     "issuesUrl": "https://github.com/BRAN-Org/abec-open-database/issues"
   },
   "dataset": {
     "title": "ABEC Meeting Open Database",
     "description": "Base de dados aberta e acervo completo 100% digitalizado dos anais e resumos das edições do ABEC Meeting (2013-2025), promovidos pela Associação Brasileira de Editores Científicos (ABEC Brasil) e disponibilizados pela BRAN Org sob princípios FAIR e BOAI.",
     "version": "1.0.0",
-    "doi": "10.21452/abecmeeting",
+    "doi": "",
     "license": "Code: GNU GPLv3 | Data: CC BY-NC-SA 4.0 (Não-Comercial & Sem Treino Comercial de IA)",
     "entityName": "articles",
     "singularName": "Artigo",
