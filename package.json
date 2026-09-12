@@ -24,7 +24,7 @@
     "express"
   ],
   "author": "BRAN Org",
-  "license": "UNLICENSED",
+  "license": "GPL-3.0-or-later AND CC-BY-4.0",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.0.0"

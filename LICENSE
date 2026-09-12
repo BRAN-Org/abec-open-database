@@ -1,21 +1,33 @@
-MIT License
+# ABEC Meeting Open Database - Dual Open Science & Open Data License
 
-Copyright (c) 2026 BRAN Org
+This repository is licensed under a dual-licensing structure to guarantee software freedom (Open Source Copyleft) and open scientific data interoperability (Open Access / Open Data).
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+---
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## 1. Software & Codebase License: GNU General Public License v3.0 (GPL-3.0)
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+All source code, engine scripts, web interfaces, backend servers, components, and automated workflows contained in this repository (excluding the scientific dataset files in `data/`) are licensed under the **GNU General Public License v3.0 (GPL-3.0)** or any later version.
+
+### Summary of Rights:
+- **Freedom to run**: You may run the software for any purpose (academic, scientific, personal, commercial).
+- **Freedom to study and modify**: You can inspect and alter the code to suit your needs.
+- **Copyleft / Open Science Guarantee**: Any derivative work or modified version of this software engine MUST also be distributed under the GPL-3.0 license and remain 100% open source.
+
+For full license terms, see: https://www.gnu.org/licenses/gpl-3.0.html
+
+---
+
+## 2. Scientific Dataset & Metadata License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+All scientific datasets, article metadata, JSON databases, CSV exports, and scientometric schemas contained in the `data/` directory (or served via `/api/v1/` REST endpoints) are licensed under the **Creative Commons Attribution 4.0 International (CC BY 4.0)** license.
+
+### Summary of Rights:
+- **Share**: Copy and redistribute the material in any medium or format.
+- **Adapt**: Remix, transform, and build upon the material for any purpose, including academic research, AI model training, scientometric analyses, and commercial indexing.
+- **Attribution**: You must give appropriate credit to BRAN Org and the original event (ABEC Brasil - Associação Brasileira de Editores Científicos), provide a link to the license, and indicate if changes were made.
+
+For full license terms, see: https://creativecommons.org/licenses/by/4.0/legalcode
+
+---
+
+Copyright (c) 2026 BRAN Org (https://github.com/BRAN-Org).

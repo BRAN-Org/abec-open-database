@@ -13,7 +13,7 @@
     "description": "Base de dados aberta e acervo completo 100% digitalizado dos anais e resumos das edições do ABEC Meeting (2013-2025), promovidos pela Associação Brasileira de Editores Científicos (ABEC Brasil) e disponibilizados pela BRAN Org sob princípios FAIR e BOAI.",
     "version": "1.0.0",
     "doi": "10.21452/abecmeeting",
-    "license": "CC-BY 4.0",
+    "license": "Code: GNU GPLv3 | Data: CC BY 4.0 (Creative Commons Attribution 4.0)",
     "entityName": "articles",
     "singularName": "Artigo",
     "pluralName": "Artigos",
