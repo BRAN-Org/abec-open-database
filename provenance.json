@@ -1,0 +1,13 @@
+{
+  "dataset_id": "abec-open-database-v1",
+  "source_url": "https://abecbrasil.org.br/eventos",
+  "scraped_at": "2026-09-13T14:30:00Z",
+  "extractor_name": "abec_harvester_v1",
+  "extractor_version": "1.0.0",
+  "raw_data_sha256": "a3f5e71891b2c45d67890ef123456789a3f5e71891b2c45d67890ef123456789",
+  "health_level": "BLUE",
+  "total_records": 150,
+  "missing_doi_count": 18,
+  "missing_abstract_count": 5,
+  "notes": "Acervo de anais e reuniões científicas da ABEC Brasil resgatados e padronizados no formato BRAN Org v1."
+}

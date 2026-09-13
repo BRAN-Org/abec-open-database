@@ -142,7 +142,7 @@ def parse_article(art_url, issue, default_section=''):
     
     article_data = {
         "id": art_id,
-        "doi": doi or f"10.21452/abecmeeting.{art_id}",
+        "doi": doi if (doi and doi.strip()) else "N/A",
         "title": title,
         "alternative_titles": alt_titles,
         "authors": authors,
