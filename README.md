@@ -2,6 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/BRAN-Org"><img src="https://img.shields.io/badge/BRAN%20Org-Open%20Data-blue.svg?style=for-the-badge&logo=github" alt="BRAN Org"></a>
+  <a href="https://github.com/BRAN-Org/.github#-%EF%B8%8F-n%C3%ADveis-de-confiabilidade-dos-dados"><img src="https://img.shields.io/badge/Confiabilidade-Em%20Curadoria-orange.svg?style=for-the-badge" alt="Confiabilidade Laranja"></a>
   <a href="https://www.budapestopenaccessinitiative.org/"><img src="https://img.shields.io/badge/BOAI-Signatory-orange.svg?style=for-the-badge" alt="BOAI Signatory"></a>
   <a href="https://www.go-fair.org/fair-principles/"><img src="https://img.shields.io/badge/FAIR-Compliant-green.svg?style=for-the-badge" alt="FAIR Principles"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/Code_License-GPLv3-blue.svg?style=for-the-badge" alt="GPLv3"></a>
@@ -86,6 +87,14 @@ npm run dev
 npm start
 ```
 Acesse no navegador: `http://localhost:3000`
+
+---
+
+## 🏅 Confiabilidade e Auditagem dos Dados
+
+| Nível de Confiabilidade | Nota & Justificativa do Acervo |
+| :---: | :--- |
+| [![Confiabilidade: Laranja](https://img.shields.io/badge/Confiabilidade-Em%20Curadoria-orange.svg?style=for-the-badge)](https://github.com/BRAN-Org/.github) | **🟠 Laranja (Em Curadoria / Processamento)**<br>O acervo do ABEC Meeting (2013-2025) com 259 artigos foi extraído com sucesso, mas encontra-se atualmente em estágio de curadoria, validação de schema, padronização e saneamento final de metadados. |
 
 ---
 
