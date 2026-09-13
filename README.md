@@ -90,7 +90,7 @@ Acesse no navegador: `http://localhost:3000`
 
 ---
 
-## 🏅 Confiabilidade e Auditagem dos Dados
+## Confiabilidade e Auditagem dos Dados
 
 | Nível de Confiabilidade | Nota & Justificativa do Acervo |
 | :---: | :--- |

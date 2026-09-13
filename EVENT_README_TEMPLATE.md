@@ -116,7 +116,7 @@ Se você utilizar estes dados em pesquisas acadêmicas ou software, por favor ci
 
 ---
 
-## 🏅 Confiabilidade e Auditagem dos Dados
+## Confiabilidade e Auditagem dos Dados
 
 | Nível de Confiabilidade | Nota & Justificativa do Acervo |
 | :---: | :--- |
