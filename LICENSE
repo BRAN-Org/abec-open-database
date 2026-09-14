@@ -1,4 +1,4 @@
-# ABEC Meeting Open Database - Dual Open Science & Anti-AI Ingestion License
+# BRAN Web Database - Dual Open Science & Anti-AI Ingestion License
 
 This repository is licensed under a dual-licensing structure to guarantee software freedom (Open Source Copyleft) and protect scientific datasets from commercial exploitation and unauthorized AI model training.
 
@@ -23,7 +23,7 @@ All scientific datasets, article metadata, JSON databases, CSV exports, and scie
 
 ### Explicit Restrictions on Commercial Use & AI Training:
 - **Academic & Scientific Reuse**: Permitted exclusively for non-commercial academic research, bibliometric studies, citation analysis, and open scientific indexing.
-- **Prohibition of Commercial AI Training**: Bulk harvesting, automated scraping, or ingestion of this dataset for training commercial Artificial Intelligence (AI) models, Large Language Models (LLMs), or proprietary Machine Learning systems is **STRICTLY PROHIBITED** without prior explicit authorization from BRAN Org and the content rights holders (ABEC Brasil).
+- **Prohibition of Commercial AI Training**: Bulk harvesting, automated scraping, or ingestion of this dataset for training commercial Artificial Intelligence (AI) models, Large Language Models (LLMs), or proprietary Machine Learning systems is **STRICTLY PROHIBITED** without prior explicit authorization from BRAN Org and the content rights holders.
 - **ShareAlike Guarantee**: Any non-commercial derivative work or scientific analysis dataset created using this data MUST also be distributed under the CC BY-NC-SA 4.0 license.
 
 For full license terms, see: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
