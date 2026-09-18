@@ -4,10 +4,10 @@
   "scraped_at": "2026-09-13T14:30:00Z",
   "extractor_name": "abec_harvester_v1",
   "extractor_version": "1.0.0",
-  "raw_data_sha256": "a3f5e71891b2c45d67890ef123456789a3f5e71891b2c45d67890ef123456789",
-  "health_level": "BLUE",
-  "total_records": 150,
-  "missing_doi_count": 18,
-  "missing_abstract_count": 5,
-  "notes": "Acervo de anais e reuniões científicas da ABEC Brasil resgatados e padronizados no formato BRAN Org v1."
+  "raw_data_sha256": "341d2f797f2971d482fd2c4ee16cca43a354dbcd2d8e621d0d5d44f722fece9c",
+  "health_level": "ORANGE",
+  "total_records": 259,
+  "missing_doi_count": 0,
+  "missing_abstract_count": 0,
+  "notes": "Acervo de anais e reuniões científicas da ABEC Brasil (2013-2025) resgatados e padronizados no formato BRAN Org v1. Classificação Laranja (Em Curadoria) com extração realizada com sucesso via OJS e metadados em processo de saneamento contínuo."
 }
