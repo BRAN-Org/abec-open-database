@@ -1,31 +1,25 @@
-# 📋 CHANGELOG — ABEC Meeting Open Database
+# 📋 Descrição Detalhada das Mudanças — BRAN Web Database Template
 
-Registro de alterações e evolução do acervo e plataforma das edições do **ABEC Meeting (2013-2025)** seguindo os padrões da **BRAN Org**.
+Este documento detalha a arquitetura, arquivos criados e funcionalidades implementadas no **`bran-web-database-template`**, alinhada aos padrões da **BRAN Org** e inspirada no projeto **EBBC-OpenData**.
 
 ---
 
-## [1.1.0] - 2026-09-18 (Auditoria Criptográfica, Conformidade de Schemas e Exportadores BibTeX & RIS)
+## [1.5.0] - 2026-09-18 (Formatos de Intercâmbio Bibliográfico: BibTeX e RIS)
 
 ### 🚀 Novas Funcionalidades (Feat)
-- **Exportação Acadêmica Dual (BibTeX & RIS)**: Adicionado suporte completo aos formatos `.bib` e `.ris` para importação direta no Zotero, Mendeley e VOSviewer.
-- **Botões Rápidos no Explorer**: Novos atalhos de exportação no frontend para BibTeX e RIS.
+- **Exportação BibTeX (`format=bibtex` / `format=bib`)**: Geração dinâmica de entradas `@inproceedings{...}` formatadas para citação acadêmica em LaTeX e importação no Zotero.
+- **Exportação RIS (`format=ris`)**: Suporte ao padrão internacional Research Information Systems (`TY - CONF ... ER - `) para integração direta com VOSviewer, Mendeley, EndNote e Bibliometrix (R).
+- **Interface & Explorer**: Adicionados botões dedicados de exportação rápida para BibTeX e RIS no painel de busca do Explorador de Dados.
 
-### 🐛 Correções de Bugs (Fix)
-- **Auditoria de Proveniência (`provenance.json`)**:
-  - Atualizada a contagem de registros para o total real de **259 artigos** (estava como 150).
-  - Calculado e injetado o hash criptográfico SHA-256 real do arquivo `abec_articles.json` (`341d2f797f2971d4...`).
-  - Alinhado nível de saúde para `ORANGE` (Em Curadoria) em total conformidade com o catálogo e o README.
-  - Ajustadas contagens de DOIs e resumos faltantes para 0.
+### 📝 Documentação (Docs)
+- Atualização da aba de Documentação da API com os novos formatos de exportação bibliográfica suportados.
 
 ### ⚙️ Infraestrutura & Testes (Chore/Test)
-- **Validador Formal (`data-truth-assert.yml`)**: Removido o mascarador `|| true`.
-- **Expansão da Suíte de Testes**: 19 testes automatizados cobrindo DataManager, StatsEngine e todos os endpoints REST de exportação.
+- Adicionados testes de integração no `tests/api.test.js` para validação de cabeçalhos e sintaxe de BibTeX e RIS.
 
 ---
 
-## [1.0.0] - 2026-09-13 (Lançamento Oficial do Acervo ABEC Meeting)
-- Ingestão automatizada das edições 2013 a 2025 via OJS (`scripts/scrape_abec.py`).
-- 259 artigos com títulos originais e alternativos, afiliações, resumos, DOIs e links de PDF.
+## [1.4.0] - 2026-09-11 (Reestruturação da Tela Inicial, Barra Superior & Footer Institucional - Branch `feat/redesign-ui`)
 
 ### 🏠 Tela Inicial (Landing Overview)
 - **Apresentação Institucional**: Adicionada a aba **"Início"** com o nome da Organização / Periódico / Faculdade / Evento em destaque.
