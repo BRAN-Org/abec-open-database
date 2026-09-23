@@ -94,7 +94,10 @@ Acesse no navegador: `http://localhost:3000`
 
 | Nível de Confiabilidade | Nota & Justificativa do Acervo |
 | :---: | :--- |
-| [![Confiabilidade: Laranja](https://img.shields.io/badge/Confiabilidade-Em%20Curadoria-orange.svg?style=for-the-badge)](https://github.com/BRAN-Org/.github) | **🟠 Laranja (Em Curadoria / Processamento)**<br>O acervo do ABEC Meeting (2013-2025) com 259 artigos foi extraído com sucesso, mas encontra-se atualmente em estágio de curadoria, validação de schema, padronização e saneamento final de metadados. |
+| [![Confiabilidade: Em Curadoria](https://img.shields.io/badge/Confiabilidade-Em%20Curadoria-orange.svg?style=for-the-badge)](https://github.com/BRAN-Org/.github) | **🟠 Em Curadoria**<br>O acervo do ABEC Meeting (2013-2025) com 259 artigos foi extraído com sucesso e encontra-se atualmente em fase de curadoria ativa, validação de identificadores persistentes e revisão de metadados. |
+
+> **Nota Metodológica Oficial:**  
+> *Os níveis de confiabilidade indicam o grau de auditoria, proveniência e validação dos dados, e não uma garantia absoluta de correção. A BRAN preserva divergências encontradas nas fontes originais e documenta correções realizadas durante o processo de curadoria.*
 
 ---
 
