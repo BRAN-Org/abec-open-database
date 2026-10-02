@@ -1,65 +1,65 @@
-# 🏛️ ABEC Meeting Open Database
+# ABEC Meeting Open Database
 
 <p align="center">
-  <a href="https://github.com/BRAN-Org"><img src="https://img.shields.io/badge/BRAN%20Org-Open%20Data-blue.svg?style=for-the-badge&logo=github" alt="BRAN Org"></a>
-  <a href="https://github.com/BRAN-Org/.github#-%EF%B8%8F-n%C3%ADveis-de-confiabilidade-dos-dados"><img src="https://img.shields.io/badge/Confiabilidade-Em%20Curadoria-orange.svg?style=for-the-badge" alt="Confiabilidade Laranja"></a>
-  <a href="https://www.budapestopenaccessinitiative.org/"><img src="https://img.shields.io/badge/BOAI-Signatory-orange.svg?style=for-the-badge" alt="BOAI Signatory"></a>
-  <a href="https://www.go-fair.org/fair-principles/"><img src="https://img.shields.io/badge/FAIR-Compliant-green.svg?style=for-the-badge" alt="FAIR Principles"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/Code_License-GPLv3-blue.svg?style=for-the-badge" alt="GPLv3"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/Data_License-CC_BY--NC--SA_4.0-lightgrey.svg?style=for-the-badge" alt="CC BY-NC-SA 4.0"></a>
+ <a href="https://github.com/BRAN-Org"><img src="https://img.shields.io/badge/BRAN%20Org-Open%20Data-blue.svg?style=for-the-badge&logo=github" alt="BRAN Org"></a>
+ <a href="https://github.com/BRAN-Org/.github#-%EF%B8%8F-n%C3%ADveis-de-confiabilidade-dos-dados"><img src="https://img.shields.io/badge/Confiabilidade-Em%20Averigua%C3%A7%C3%A3o-orange.svg?style=for-the-badge" alt="Confiabilidade Laranja"></a>
+ <a href="https://www.budapestopenaccessinitiative.org/"><img src="https://img.shields.io/badge/BOAI-Signatory-orange.svg?style=for-the-badge" alt="BOAI Signatory"></a>
+ <a href="https://www.go-fair.org/fair-principles/"><img src="https://img.shields.io/badge/FAIR-Compliant-green.svg?style=for-the-badge" alt="FAIR Principles"></a>
+ <a href="LICENSE"><img src="https://img.shields.io/badge/Code_License-GPLv3-blue.svg?style=for-the-badge" alt="GPLv3"></a>
+ <a href="LICENSE"><img src="https://img.shields.io/badge/Data_License-CC_BY--NC--SA_4.0-lightgrey.svg?style=for-the-badge" alt="CC BY-NC-SA 4.0"></a>
 </p>
 
 Acervo público, modular e reproduzível contendo a **digitalização 100% integral** dos anais e resumos das edições do **ABEC Meeting** (2013-2025), organizados pela **Associação Brasileira de Editores Científicos (ABEC Brasil)** e mantidos pela **[BRAN Org](https://github.com/BRAN-Org)**.
 
 ---
 
-## ⚡ Recursos Principais
+## Recursos Principais
 
 - **100% Digitalizado**: Raspagem completa e metadados padronizados de todas as 14 edições (2013 a 2025) do acervo histórico do ABEC Meeting.
 - **API REST Pública**:
-  - `GET /api/v1/articles`: Busca textual global, filtros por ano, autor, seção, palavra-chave e ordenação.
-  - `GET /api/v1/articles/stats`: Estatísticas agregadas calculadas dinamicamente (ranking de autores, palavras-chave e distribuição temporal).
-  - `GET /api/v1/articles/:key`: Busca direta por DOI ou ID do artigo.
-  - `GET /api/v1/articles/export`: Exportação em streaming nos formatos **JSON** e **CSV** (BOM UTF-8 para Excel).
+ - `GET /api/v1/articles`: Busca textual global, filtros por ano, autor, seção, palavra-chave e ordenação.
+ - `GET /api/v1/articles/stats`: Estatísticas agregadas calculadas dinamicamente (ranking de autores, palavras-chave e distribuição temporal).
+ - `GET /api/v1/articles/:key`: Busca direta por DOI ou ID do artigo.
+ - `GET /api/v1/articles/export`: Exportação em streaming nos formatos **JSON** e **CSV** (BOM UTF-8 para Excel).
 - **Dashboard Web Interativo (Portal)**:
-  - Visualizações gráficas dinâmicas em Canvas (evolução temporal, principais seções).
-  - Tabela interativa com busca em tempo real e filtros multifacetados.
-  - API Sandbox gerando trechos de código em JavaScript (Fetch), Python (Requests) e cURL.
+ - Visualizações gráficas dinâmicas em Canvas (evolução temporal, principais seções).
+ - Tabela interativa com busca em tempo real e filtros multifacetados.
+ - API Sandbox gerando trechos de código em JavaScript (Fetch), Python (Requests) e cURL.
 - **Conformidade FAIR & BOAI**: Disponibilizado sob licença livre Creative Commons Attribution 4.0 International (CC-BY 4.0).
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 abec-open-database/
 ├── config/
-│   └── dataset.config.json      # Configuração central do dataset, entidade, licença e filtros
+│ └── dataset.config.json # Configuração central do dataset, entidade, licença e filtros
 ├── data/
-│   └── abec_articles.json       # Dataset consolidado 100% digitalizado
+│ └── abec_articles.json # Dataset consolidado 100% digitalizado
 ├── public/
-│   ├── css/style.css            # Interface e temas visuais
-│   ├── js/
-│   │   ├── app.js               # Lógica do portal e API Sandbox
-│   │   └── charts.js            # Gráficos dinâmicos em Canvas
-│   └── index.html               # Interface do Portal Web
+│ ├── css/style.css # Interface e temas visuais
+│ ├── js/
+│ │ ├── app.js # Lógica do portal e API Sandbox
+│ │ └── charts.js # Gráficos dinâmicos em Canvas
+│ └── index.html # Interface do Portal Web
 ├── scripts/
-│   ├── scrape_abec.py           # Script de extração e web scraping do OJS
-│   ├── convert_csv_to_json.js   # Script conversor utilitário
-│   └── validate_dataset.js      # Validador de integridade do dataset
+│ ├── scrape_abec.py # Script de extração e web scraping do OJS
+│ ├── convert_csv_to_json.js # Script conversor utilitário
+│ └── validate_dataset.js # Validador de integridade do dataset
 ├── src/
-│   ├── config.js                # Loader de configurações
-│   ├── dataManager.js           # Indexação em memória e motor de busca
-│   ├── exportEngine.js          # Exportação em streaming (JSON / CSV)
-│   ├── statsEngine.js           # Agregador de métricas e estatísticas
-│   └── routes.js                # Rotas da API REST
-├── server.js                    # Servidor Express principal
-└── vercel.json                  # Configuração para deploy na Vercel
+│ ├── config.js # Loader de configurações
+│ ├── dataManager.js # Indexação em memória e motor de busca
+│ ├── exportEngine.js # Exportação em streaming (JSON / CSV)
+│ ├── statsEngine.js # Agregador de métricas e estatísticas
+│ └── routes.js # Rotas da API REST
+├── server.js # Servidor Express principal
+└── vercel.json # Configuração para deploy na Vercel
 ```
 
 ---
 
-## 🚀 Como Executar Localmente
+## Como Executar Localmente
 
 ### 1. Clonar e Instalar Dependências
 ```bash
@@ -94,31 +94,31 @@ Acesse no navegador: `http://localhost:3000`
 
 | Nível de Confiabilidade | Nota & Justificativa do Acervo |
 | :---: | :--- |
-| [![Confiabilidade: Em Curadoria](https://img.shields.io/badge/Confiabilidade-Em%20Curadoria-orange.svg?style=for-the-badge)](https://github.com/BRAN-Org/.github) | **🟠 Em Curadoria**<br>O acervo do ABEC Meeting (2013-2025) com 259 artigos foi extraído com sucesso e encontra-se atualmente em fase de curadoria ativa, validação de identificadores persistentes e revisão de metadados. |
+| [![Confiabilidade: Em Averiguação](https://img.shields.io/badge/Confiabilidade-Em%20Averigua%C3%A7%C3%A3o-orange.svg?style=for-the-badge)](https://github.com/BRAN-Org/.github#-%EF%B8%8F-n%C3%ADveis-de-confiabilidade-dos-dados) | **🟠 Em Averiguação**<br>O acervo do ABEC Meeting (2013-2025) com 259 artigos foi extraído e está atualmente sob averiguação ativa de integridade, normalização de metadados e checagem de identificadores. |
 
-> **Nota Metodológica Oficial:**  
-> *Os níveis de confiabilidade indicam o grau de auditoria, proveniência e validação dos dados, e não uma garantia absoluta de correção. A BRAN preserva divergências encontradas nas fontes originais e documenta correções realizadas durante o processo de curadoria.*
+> **Nota Metodológica Oficial:** 
+> *A BRAN preserva a fidelidade estrita à fonte de origem e nunca inventa dados inexistentes. Discrepâncias e lacunas identificadas nos portais oficiais são registradas nos relatórios de auditoria e tratadas via averiguação ativa e contato direto com as instituições organizadoras.*
 
 ---
 
-## 📜 Princípios e Licença
+## Princípios e Licença
 
 - **[Princípios FAIR](https://www.go-fair.org/fair-principles/)**: Dados *Findable, Accessible, Interoperable, Reusable*.
 - **[BOAI](https://www.budapestopenaccessinitiative.org/)**: Livre acesso à informação e produção acadêmica.
 - **Licenciamento Duplo**:
-  - **Código-fonte & Engine**: [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.html) — Garante Ciência Aberta e código livre livre de fechamentos proprietários.
-  - **Dataset Científico & Metadados (`data/`)**: [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/) — Permite uso e distribuição exclusivamente para pesquisa não-comercial, proibindo expressamente a raspagem ou ingestão para treinamento comercial de modelos de Inteligência Artificial sem autorização prévia.
+ - **Código-fonte & Engine**: [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.html) — Garante Ciência Aberta e código livre livre de fechamentos proprietários.
+ - **Dataset Científico & Metadados (`data/`)**: [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/) — Permite uso e distribuição exclusivamente para pesquisa não-comercial, proibindo expressamente a raspagem ou ingestão para treinamento comercial de modelos de Inteligência Artificial sem autorização prévia.
 
 ---
 
-## 📬 Submissão de Dados
+## Submissão de Dados
 
 Possui dados acadêmicos ou acervos científicos que gostaria de disponibilizar publicamente pela BRAN Org? Preencha o formulário de submissão:
 
-➡️ **[Formulário de Submissão de Datasets](https://forms.gle/jNBuP1mjyUXc6v1fA)**
+ **[Formulário de Submissão de Datasets](https://forms.gle/jNBuP1mjyUXc6v1fA)**
 
 ---
 
 <p align="center">
-  Desenvolvido com ❤️ pela <strong>BRAN Org</strong> & <strong>ABEC Brasil</strong>
+ Desenvolvido com pela <strong>BRAN Org</strong> & <strong>ABEC Brasil</strong>
 </p>
