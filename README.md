@@ -94,7 +94,7 @@ Acesse no navegador: `http://localhost:3000`
 
 | Nível de Confiabilidade | Nota & Justificativa do Acervo |
 | :---: | :--- |
-| [![Confiabilidade: Em Averiguação](https://img.shields.io/badge/Confiabilidade-Em%20Averigua%C3%A7%C3%A3o-orange.svg?style=for-the-badge)](https://github.com/BRAN-Org/.github#-%EF%B8%8F-n%C3%ADveis-de-confiabilidade-dos-dados) | **🟠 Em Averiguação**<br>O acervo do ABEC Meeting (2013-2025) com 259 artigos foi extraído e está atualmente sob averiguação ativa de integridade, normalização de metadados e checagem de identificadores. |
+| [![Confiabilidade: Em Averiguação](https://img.shields.io/badge/Confiabilidade-Em%20Averigua%C3%A7%C3%A3o-orange.svg?style=for-the-badge)](https://github.com/BRAN-Org/.github#-%EF%B8%8F-n%C3%ADveis-de-confiabilidade-dos-dados) | **Em Averiguação**<br>O acervo do ABEC Meeting (2013-2025) com 259 artigos foi extraído e está atualmente sob averiguação ativa de integridade, normalização de metadados e checagem de identificadores. |
 
 > **Nota Metodológica Oficial:** 
 > *A BRAN preserva a fidelidade estrita à fonte de origem e nunca inventa dados inexistentes. Discrepâncias e lacunas identificadas nos portais oficiais são registradas nos relatórios de auditoria e tratadas via averiguação ativa e contato direto com as instituições organizadoras.*
@@ -120,5 +120,5 @@ Possui dados acadêmicos ou acervos científicos que gostaria de disponibilizar 
 ---
 
 <p align="center">
- Desenvolvido com pela <strong>BRAN Org</strong> & <strong>ABEC Brasil</strong>
+ Desenvolvido pela <strong>BRAN Org</strong> & <strong>ABEC Brasil</strong>
 </p>
