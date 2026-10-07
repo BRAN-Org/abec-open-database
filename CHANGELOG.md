@@ -1,6 +1,6 @@
-# Descrição Detalhada das Mudanças — BRAN Web Database Template
+# Changelog — ABEC Open Database
 
-Este documento detalha a arquitetura, arquivos criados e funcionalidades implementadas no **`bran-web-database-template`**, alinhada aos padrões da **BRAN Org** e inspirada no projeto **EBBC-OpenData**.
+Registro de versões, auditorias e atualizações da base de dados do **ABEC Meeting** mantida pela **BRAN Org**.
 
 ---
 
