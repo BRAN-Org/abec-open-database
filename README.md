@@ -7,6 +7,7 @@
  <a href="https://www.go-fair.org/fair-principles/"><img src="https://img.shields.io/badge/FAIR-Compliant-green.svg?style=for-the-badge" alt="FAIR Principles"></a>
  <a href="LICENSE"><img src="https://img.shields.io/badge/Code_License-GPLv3-blue.svg?style=for-the-badge" alt="GPLv3"></a>
  <a href="LICENSE"><img src="https://img.shields.io/badge/Data_License-CC_BY--NC--SA_4.0-lightgrey.svg?style=for-the-badge" alt="CC BY-NC-SA 4.0"></a>
+ <a href="https://doi.org/10.5281/zenodo.23595236"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23595236.svg" alt="DOI"></a>
 </p>
 
 Acervo público, modular e reproduzível contendo a **digitalização 100% integral** dos anais e resumos das edições do **ABEC Meeting** (2013-2025), organizados pela **Associação Brasileira de Editores Científicos (ABEC Brasil)** e mantidos pela **[BRAN Org](https://github.com/BRAN-Org)**.
