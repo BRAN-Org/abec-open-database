@@ -1,0 +1,40 @@
+{
+  "title": "ABEC Meeting Open Database: Anais Abertos do Encontro da Associação Brasileira de Editores Científicos (2013-2025)",
+  "description": "<p>Base de dados aberta e acervo completo dos anais e resumos das edições do ABEC Meeting (2013-2025, 259 artigos), promovidos pela Associação Brasileira de Editores Científicos (ABEC Brasil) e disponibilizados pela BRAN Org sob princípios FAIR e BOAI em formatos JSON, CSV, BibTeX, RIS e SQLite.</p>",
+  "upload_type": "dataset",
+  "creators": [
+    {
+      "name": "Associação Brasileira de Editores Científicos (ABEC Brasil)",
+      "type": "organization"
+    },
+    {
+      "name": "BRAN Org",
+      "affiliation": "Brazilian Research Archive Network"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-nc-sa-4.0",
+  "keywords": [
+    "open-data",
+    "bibliometrics",
+    "scientometrics",
+    "abec-brasil",
+    "scientific-publishing",
+    "academic-data",
+    "fair-data",
+    "brazil"
+  ],
+  "communities": [
+    {
+      "identifier": "bran-org"
+    }
+  ],
+  "publication_date": "2026-10-22",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/BRAN-Org/abec-open-database",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}
