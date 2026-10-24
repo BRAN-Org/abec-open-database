@@ -10,7 +10,7 @@
  <a href="https://doi.org/10.5281/zenodo.23595236"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23595236.svg" alt="DOI"></a>
 </p>
 
-Acervo público, modular e reproduzível contendo a **digitalização 100% integral** dos anais e resumos das edições do **ABEC Meeting** (2013-2025), organizados pela **Associação Brasileira de Editores Científicos (ABEC Brasil)** e mantidos pela **[BRAN Org](https://github.com/BRAN-Org)**.
+Acervo público, modular e reproduzível contendo a **digitalização 100% integral** dos anais e resumos das edições do **ABEC Meeting** (2013-2025), mantido e disponibilizado pela **[BRAN Org](https://github.com/BRAN-Org)**.
 
 ---
 
@@ -98,7 +98,7 @@ Acesse no navegador: `http://localhost:3000`
 | [![Confiabilidade: Em Averiguação](https://img.shields.io/badge/Confiabilidade-Em%20Averigua%C3%A7%C3%A3o-orange.svg?style=for-the-badge)](https://github.com/BRAN-Org/.github#-%EF%B8%8F-n%C3%ADveis-de-confiabilidade-dos-dados) | **Em Averiguação**<br>O acervo do ABEC Meeting (2013-2025) com 259 artigos foi extraído e está atualmente sob averiguação ativa de integridade, normalização de metadados e checagem de identificadores. |
 
 > **Nota Metodológica Oficial:** 
-> *A BRAN preserva a fidelidade estrita à fonte de origem e nunca inventa dados inexistentes. Discrepâncias e lacunas identificadas nos portais oficiais são registradas nos relatórios de auditoria e tratadas via averiguação ativa e contato direto com as instituições organizadoras.*
+> *A BRAN preserva a fidelidade estrita à fonte de origem e nunca inventa dados inexistentes. Discrepâncias e lacunas identificadas nos portais de origem são registradas e tratadas tecnicamente nos relatórios de auditoria.*
 
 ---
 
@@ -121,5 +121,5 @@ Possui dados acadêmicos ou acervos científicos que gostaria de disponibilizar 
 ---
 
 <p align="center">
- Desenvolvido pela <strong>BRAN Org</strong> & <strong>ABEC Brasil</strong>
+  Desenvolvido e mantido pela <strong>BRAN Org</strong>
 </p>

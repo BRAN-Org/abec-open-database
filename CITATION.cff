@@ -8,7 +8,6 @@ url: "https://github.com/BRAN-Org/abec-open-database"
 repository-code: "https://github.com/BRAN-Org/abec-open-database"
 license: GPL-3.0-or-later
 authors:
-  - name: "Associação Brasileira de Editores Científicos (ABEC Brasil)"
   - name: "BRAN Org"
     website: "https://github.com/BRAN-Org"
 keywords:
