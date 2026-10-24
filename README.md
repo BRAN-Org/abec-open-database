@@ -1,125 +1,129 @@
 # ABEC Meeting Open Database
 
 <p align="center">
- <a href="https://github.com/BRAN-Org"><img src="https://img.shields.io/badge/BRAN%20Org-Open%20Data-blue.svg?style=for-the-badge&logo=github" alt="BRAN Org"></a>
- <a href="https://github.com/BRAN-Org/.github#-%EF%B8%8F-n%C3%ADveis-de-confiabilidade-dos-dados"><img src="https://img.shields.io/badge/Confiabilidade-Em%20Averigua%C3%A7%C3%A3o-orange.svg?style=for-the-badge" alt="Confiabilidade Laranja"></a>
- <a href="https://www.budapestopenaccessinitiative.org/"><img src="https://img.shields.io/badge/BOAI-Signatory-orange.svg?style=for-the-badge" alt="BOAI Signatory"></a>
- <a href="https://www.go-fair.org/fair-principles/"><img src="https://img.shields.io/badge/FAIR-Compliant-green.svg?style=for-the-badge" alt="FAIR Principles"></a>
- <a href="LICENSE"><img src="https://img.shields.io/badge/Code_License-GPLv3-blue.svg?style=for-the-badge" alt="GPLv3"></a>
- <a href="LICENSE"><img src="https://img.shields.io/badge/Data_License-CC_BY--NC--SA_4.0-lightgrey.svg?style=for-the-badge" alt="CC BY-NC-SA 4.0"></a>
- <a href="https://doi.org/10.5281/zenodo.23595236"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23595236.svg" alt="DOI"></a>
+  <a href="https://doi.org/10.5281/zenodo.23595236"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23595236.svg" alt="Zenodo DOI"></a>
+  <a href="https://www.go-fair.org/fair-principles/"><img src="https://img.shields.io/badge/FAIR-Compliant-green.svg?style=for-the-badge" alt="FAIR Principles"></a>
+  <a href="https://www.budapestopenaccessinitiative.org/"><img src="https://img.shields.io/badge/BOAI-Signatory-orange.svg?style=for-the-badge" alt="BOAI Signatory"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Data_License-CC_BY--NC--SA_4.0-lightgrey.svg?style=for-the-badge" alt="CC BY-NC-SA 4.0"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Code_License-GPLv3-blue.svg?style=for-the-badge" alt="GPLv3"></a>
 </p>
 
-Acervo público, modular e reproduzível contendo a **digitalização 100% integral** dos anais e resumos das edições do **ABEC Meeting** (2013-2025), mantido e disponibilizado pela **[BRAN Org](https://github.com/BRAN-Org)**.
+Base de dados aberta e acervo completo 100% digitalizado dos anais e resumos das edições do ABEC Meeting (2013-2025), promovidos pela Associação Brasileira de Editores Científicos (ABEC Brasil) e disponibilizados pela BRAN Org sob princípios FAIR e BOAI.
 
 ---
 
-## Recursos Principais
+## 📊 Acervo em Números
 
-- **100% Digitalizado**: Raspagem completa e metadados padronizados de todas as 14 edições (2013 a 2025) do acervo histórico do ABEC Meeting.
-- **API REST Pública**:
- - `GET /api/v1/articles`: Busca textual global, filtros por ano, autor, seção, palavra-chave e ordenação.
- - `GET /api/v1/articles/stats`: Estatísticas agregadas calculadas dinamicamente (ranking de autores, palavras-chave e distribuição temporal).
- - `GET /api/v1/articles/:key`: Busca direta por DOI ou ID do artigo.
- - `GET /api/v1/articles/export`: Exportação em streaming nos formatos **JSON** e **CSV** (BOM UTF-8 para Excel).
-- **Dashboard Web Interativo (Portal)**:
- - Visualizações gráficas dinâmicas em Canvas (evolução temporal, principais seções).
- - Tabela interativa com busca em tempo real e filtros multifacetados.
- - API Sandbox gerando trechos de código em JavaScript (Fetch), Python (Requests) e cURL.
-- **Conformidade FAIR & BOAI**: Disponibilizado sob licença livre Creative Commons Attribution 4.0 International (CC-BY 4.0).
+| Métrica / Atributo | Detalhes do Acervo |
+| :--- | :--- |
+| **Período Histórico** | 2013–2025 (14 Edições) |
+| **Total de Artigos** | **259 trabalhos científicos catalogados** |
+| **Textos Completos (PDF)** | 257 artigos com texto completo em PDF preservado (99,2% do acervo) |
+| **Formatos Estruturados** | SQLite3 (`.sqlite`), CSV UTF-8 BOM, JSON, BibTeX (`.bib`), RIS (`.ris`) |
+| **Curadoria & Proveniência** | Curadoria independente com integridade criptográfica (hash SHA-256) pela [BRAN Org](https://github.com/BRAN-Org) |
+| **Licença dos Dados** | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) (Uso acadêmico/não-comercial; vedada ingestão para IA comercial) |
+| **Licença do Código** | [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html) |
 
 ---
 
-## Estrutura do Projeto
+## 📦 Onde Baixar (Pacote Completo no Zenodo)
 
-```
-abec-open-database/
-├── config/
-│ └── dataset.config.json # Configuração central do dataset, entidade, licença e filtros
-├── data/
-│ └── abec_articles.json # Dataset consolidado 100% digitalizado
-├── public/
-│ ├── css/style.css # Interface e temas visuais
-│ ├── js/
-│ │ ├── app.js # Lógica do portal e API Sandbox
-│ │ └── charts.js # Gráficos dinâmicos em Canvas
-│ └── index.html # Interface do Portal Web
-├── scripts/
-│ ├── scrape_abec.py # Script de extração e web scraping do OJS
-│ ├── convert_csv_to_json.js # Script conversor utilitário
-│ └── validate_dataset.js # Validador de integridade do dataset
-├── src/
-│ ├── config.js # Loader de configurações
-│ ├── dataManager.js # Indexação em memória e motor de busca
-│ ├── exportEngine.js # Exportação em streaming (JSON / CSV)
-│ ├── statsEngine.js # Agregador de métricas e estatísticas
-│ └── routes.js # Rotas da API REST
-├── server.js # Servidor Express principal
-└── vercel.json # Configuração para deploy na Vercel
+Todo o acervo bruto, o banco relacional completo e os arquivos individuais estão arquivados permanentemente no **CERN / Zenodo** sob DOI imutável. Você pode baixar todos os arquivos de uma só vez:
+
+- 🔗 **Registro Permanente**: [https://doi.org/10.5281/zenodo.23595236](https://doi.org/10.5281/zenodo.23595236)
+- 📥 **Pacote Consolidado (.zip)**: Inclui o banco relacional SQLite3 (`abec_articles.sqlite`), planilhas CSV consolidadas (`abec_articles.csv`), metadados estruturados JSON, arquivos de referência BibTeX/RIS e a coleção de PDFs em texto completo.
+
+### Download direto via terminal (cURL / Wget)
+```bash
+# Baixar o pacote completo do Zenodo
+curl -LO "https://zenodo.org/records/23595236/files/abec-open-database-zenodo.zip"
+unzip abec-open-database-zenodo.zip
 ```
 
 ---
 
-## Como Executar Localmente
+## ⚡ Como Usar os Dados
 
-### 1. Clonar e Instalar Dependências
+### 1. Python (Pandas)
+```python
+import pandas as pd
+
+# Carregar o dataset estruturado
+df = pd.read_json("data/abec_articles.json")
+print(f"Total de registros: {len(df)}")
+print(df[["title", "year", "authors"]].head())
+```
+
+### 2. SQLite3 (SQL direto no terminal)
+```bash
+# Consultar distribuição temporal direto no banco relacional
+sqlite3 data/abec_articles.sqlite "SELECT year, COUNT(*) as total FROM articles GROUP BY year ORDER BY year;"
+```
+
+---
+
+## 🌐 API REST Pública
+
+O repositório fornece uma API REST de alta performance, gratuita e sem necessidade de chave de autenticação (API Key):
+
+| Método | Endpoint | Finalidade |
+| :--- | :--- | :--- |
+| `GET` | `/api/v1/articles` | Lista registros com busca textual global (`?q=`), filtros facetados (`?year=`, `?author=`), ordenação e paginação |
+| `GET` | `/api/v1/articles/:key` | Consulta individual exata por DOI ou ID do artigo |
+| `GET` | `/api/v1/articles/stats` | Estatísticas agregadas (rankings de autores, tópicos e evolução temporal) |
+| `GET` | `/api/v1/articles/export?format=csv` | Download instantâneo dos registros filtrados em **CSV (BOM UTF-8)** |
+| `GET` | `/api/v1/articles/export?format=bibtex` | Download das referências bibliográficas filtradas em **BibTeX** |
+
+### Exemplo de Requisição (cURL)
+```bash
+curl -s "http://localhost:3000/api/v1/articles?q=informacao&limit=5"
+```
+
+---
+
+## 🚀 Como Executar o Portal Localmente
+
+Para rodar o portal interativo com gráficos dinâmicos, sandbox e explorador de artigos:
+
 ```bash
 git clone https://github.com/BRAN-Org/abec-open-database.git
 cd abec-open-database
 npm install
-```
-
-### 2. Executar o Web Scraping (Opcional - Dados já inclusos)
-```bash
-npm run data:scrape
-```
-
-### 3. Validar a Base de Dados
-```bash
-npm run data:validate
-```
-
-### 4. Iniciar o Servidor
-```bash
-# Modo desenvolvimento (com auto-reload)
-npm run dev
-
-# Modo produção
 npm start
 ```
 Acesse no navegador: `http://localhost:3000`
 
 ---
 
-## Confiabilidade e Auditagem dos Dados
+## 📖 Como Citar Este Dataset
 
-| Nível de Confiabilidade | Nota & Justificativa do Acervo |
-| :---: | :--- |
-| [![Confiabilidade: Em Averiguação](https://img.shields.io/badge/Confiabilidade-Em%20Averigua%C3%A7%C3%A3o-orange.svg?style=for-the-badge)](https://github.com/BRAN-Org/.github#-%EF%B8%8F-n%C3%ADveis-de-confiabilidade-dos-dados) | **Em Averiguação**<br>O acervo do ABEC Meeting (2013-2025) com 259 artigos foi extraído e está atualmente sob averiguação ativa de integridade, normalização de metadados e checagem de identificadores. |
+Se você utilizar estes dados em pesquisas acadêmicas, teses ou softwares, por favor cite:
 
-> **Nota Metodológica Oficial:** 
-> *A BRAN preserva a fidelidade estrita à fonte de origem e nunca inventa dados inexistentes. Discrepâncias e lacunas identificadas nos portais de origem são registradas e tratadas tecnicamente nos relatórios de auditoria.*
+```bibtex
+@misc{abec_open_database_2026,
+  author       = {BRAN Org},
+  title        = {ABEC Meeting Open Database},
+  year         = {2026},
+  howpublished = {Zenodo},
+  doi          = {10.5281/zenodo.23595236},
+  url          = {https://doi.org/10.5281/zenodo.23595236},
+  note         = {Base de dados bibliométrica aberta curada pela Brazilian Research Archive Network}
+}
+```
+
+**ABNT:**
+> BRAN ORG. **ABEC Meeting Open Database**. Genebra: CERN / Zenodo, 2026. DOI: 10.5281/zenodo.23595236. Disponível em: &lt;https://doi.org/10.5281/zenodo.23595236&gt;.
 
 ---
 
-## Princípios e Licença
+## 🛡️ Confiabilidade e Governança
 
-- **[Princípios FAIR](https://www.go-fair.org/fair-principles/)**: Dados *Findable, Accessible, Interoperable, Reusable*.
-- **[BOAI](https://www.budapestopenaccessinitiative.org/)**: Livre acesso à informação e produção acadêmica.
-- **Licenciamento Duplo**:
- - **Código-fonte & Engine**: [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.html) — Garante Ciência Aberta e código livre livre de fechamentos proprietários.
- - **Dataset Científico & Metadados (`data/`)**: [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/) — Permite uso e distribuição exclusivamente para pesquisa não-comercial, proibindo expressamente a raspagem ou ingestão para treinamento comercial de modelos de Inteligência Artificial sem autorização prévia.
-
----
-
-## Submissão de Dados
-
-Possui dados acadêmicos ou acervos científicos que gostaria de disponibilizar publicamente pela BRAN Org? Preencha o formulário de submissão:
-
- **[Formulário de Submissão de Datasets](https://forms.gle/jNBuP1mjyUXc6v1fA)**
+- **Classificação**: 🟠 **Em Averiguação** — Acervo extraído sob averiguação ativa de integridade, normalização de metadados e checagem de identificadores.
+- **Auditoria Independente**: Verificação e catalogação executada com rigor metodológico, conferência contra publicações e integridade criptográfica.
+- **Calendário de Curadoria**: Acompanhe os ciclos de atualização no repositório [BRAN-Org/.github](https://github.com/BRAN-Org/.github/blob/main/CALENDAR.md).
 
 ---
 
 <p align="center">
-  Desenvolvido e mantido pela <strong>BRAN Org</strong>
+  Curadoria e Preservação Digital por <strong><a href="https://github.com/BRAN-Org">BRAN Org</a></strong>
 </p>
