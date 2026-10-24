@@ -2,6 +2,7 @@
 
 <p align="center">
   <a href="https://doi.org/10.5281/zenodo.23595236"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23595236.svg" alt="Zenodo DOI"></a>
+  <a href="#️-confiabilidade-e-governança"><img src="https://img.shields.io/badge/Confiabilidade-Em%20Averigua%C3%A7%C3%A3o-orange?style=for-the-badge" alt="Confiabilidade"></a>
   <a href="https://www.go-fair.org/fair-principles/"><img src="https://img.shields.io/badge/FAIR-Compliant-green.svg?style=for-the-badge" alt="FAIR Principles"></a>
   <a href="https://www.budapestopenaccessinitiative.org/"><img src="https://img.shields.io/badge/BOAI-Signatory-orange.svg?style=for-the-badge" alt="BOAI Signatory"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/Data_License-CC_BY--NC--SA_4.0-lightgrey.svg?style=for-the-badge" alt="CC BY-NC-SA 4.0"></a>
@@ -14,8 +15,13 @@ Base de dados aberta e acervo completo 100% digitalizado dos anais e resumos das
 
 ## 📊 Acervo em Números
 
+> [!NOTE]
+> **Status de Confiabilidade:** 🟠 **Em Averiguação**  
+> 📌 **Por que este acervo recebeu esta nota:** Acervo com 259 artigos (2013–2025) e 257 PDFs em texto completo preservados (99,2% de cobertura). A classificação laranja documenta acervo extraído recentemente sob processo ativo de averiguação técnica pela curadoria, incluindo conferência cruzada de identificadores, desambiguação de autoria e validação estrita da integridade de metadados antes de ser promovido à classificação verde.
+
 | Métrica / Atributo | Detalhes do Acervo |
 | :--- | :--- |
+| **Confiabilidade dos Dados** | 🟠 **Em Averiguação** ([Ver critérios e auditoria](#️-confiabilidade-e-governança)) |
 | **Período Histórico** | 2013–2025 (14 Edições) |
 | **Total de Artigos** | **259 trabalhos científicos catalogados** |
 | **Textos Completos (PDF)** | 257 artigos com texto completo em PDF preservado (99,2% do acervo) |
@@ -118,9 +124,21 @@ Se você utilizar estes dados em pesquisas acadêmicas, teses ou softwares, por 
 
 ## 🛡️ Confiabilidade e Governança
 
-- **Classificação**: 🟠 **Em Averiguação** — Acervo extraído sob averiguação ativa de integridade, normalização de metadados e checagem de identificadores.
-- **Auditoria Independente**: Verificação e catalogação executada com rigor metodológico, conferência contra publicações e integridade criptográfica.
-- **Calendário de Curadoria**: Acompanhe os ciclos de atualização no repositório [BRAN-Org/.github](https://github.com/BRAN-Org/.github/blob/main/CALENDAR.md).
+<p align="center">
+  <a href="https://github.com/BRAN-Org/.github#níveis-de-confiabilidade-dos-dados">
+    <img src="https://img.shields.io/badge/Confiabilidade-Em%20Averigua%C3%A7%C3%A3o-orange?style=for-the-badge" alt="Selo de Confiabilidade">
+  </a>
+</p>
+
+| Dimensão de Governança | Avaliação da Curadoria Independente |
+| :--- | :--- |
+| **Classificação Oficial** | 🟠 **Em Averiguação** |
+| **Diagnóstico Técnico (Por que recebeu esta nota)** | Acervo com 259 artigos (2013–2025) e 257 PDFs em texto completo preservados (99,2% de cobertura). A classificação laranja documenta acervo extraído recentemente sob processo ativo de averiguação técnica pela curadoria, incluindo conferência cruzada de identificadores, desambiguação de autoria e validação estrita da integridade de metadados antes de ser promovido à classificação verde. |
+| **Método de Auditoria** | Verificação independente com hash criptográfico SHA-256 por arquivo, conferência direta contra publicações originais e rastreabilidade estrita. |
+| **Ciclo de Atualização** | Acompanhe as revisões periódicas no repositório [BRAN-Org/.github](https://github.com/BRAN-Org/.github/blob/main/CALENDAR.md). |
+
+> [!IMPORTANT]
+> **Transparência da Curadoria:** A BRAN Org preserva a fidelidade estrita à fonte primária e não inventa dados ou metadados inexistentes. Lacunas ou inconsistências presentes na origem são documentadas tecnicamente para assegurar integridade em análises cienciométricas.
 
 ---
 
