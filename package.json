@@ -1,7 +1,7 @@
 {
-  "name": "bran-web-database-template",
+  "name": "abec-open-database",
   "version": "1.5.0",
-  "description": "Template leve e reproduzível para APIs REST públicas e Dashboards de bases de dados acadêmicas da BRAN Org.",
+  "description": "API REST pública e Dashboard interativo para o acervo histórico dos encontros do ABEC Meeting (2013-2025) - BRAN Org.",
   "main": "server.js",
   "type": "module",
   "scripts": {
