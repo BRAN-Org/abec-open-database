@@ -9,5 +9,11 @@
   "total_records": 259,
   "missing_doi_count": 0,
   "missing_abstract_count": 0,
-  "notes": "Acervo de anais e reuniões científicas da ABEC Brasil (2013-2025) resgatados e padronizados no formato BRAN Org v1. Classificação Laranja (Em Curadoria) com extração realizada com sucesso via OJS e metadados em processo de saneamento contínuo."
+  "notes": "Acervo de anais e reuniões científicas da ABEC Brasil (2013-2025) resgatados e padronizados no formato BRAN Org v1. Classificação Laranja (Em Curadoria) com extração realizada com sucesso via OJS e metadados em processo de saneamento contínuo.",
+  "last_audited_at": "2026-11-09T13:25:04.160010+00:00",
+  "checksums": {
+    "abec_articles.json": "341d2f797f2971d482fd2c4ee16cca43a354dbcd2d8e621d0d5d44f722fece9c",
+    "abec_articles.csv": "8a3f015a38bae0dcabe7c04f50b499d5041805df09d9974df0f3a7e3a803b415",
+    "abec_articles.sqlite": "d4543755de3386e2e17f03e6cad46ba0c624249fb690289a3ec6522ecacb56c6"
+  }
 }
